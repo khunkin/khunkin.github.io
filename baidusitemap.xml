@@ -4,17 +4,40 @@
 
     
   <url>
+    <loc>http://KunKin.github.io/khunkin.github.io/2018/05/16/Permutation/</loc>
+    <lastmod>2018-05-16T07:53:19.319Z</lastmod>
+    <data>
+        <display>
+        <title>Permutation</title>
+        <pubTime>2018-05-16T03:36:29.000Z</pubTime>
+        
+        <tag>C</tag>
+         
+         
+           
+             
+              <breadCrumb title="Learning C" url="http://KunKin.github.io/khunkin.github.io/categories/Learning-C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://KunKin.github.io/khunkin.github.io/2018/05/16/Learning-MySQL/</loc>
-    <lastmod>2018-05-16T03:52:52.414Z</lastmod>
+    <lastmod>2018-05-16T07:52:39.635Z</lastmod>
     <data>
         <display>
         <title>Learning MySQL</title>
         <pubTime>2018-05-16T03:49:02.000Z</pubTime>
         
-        <tag>Learning MySQL</tag>
+        <tag>MySQL</tag>
          
          
            
+             
+              <breadCrumb title="Learning MySQL" url="http://KunKin.github.io/khunkin.github.io/categories/Learning-MySQL/"/>
+          
         </display>
     </data>
     </url>
@@ -22,16 +45,19 @@
     
   <url>
     <loc>http://KunKin.github.io/khunkin.github.io/2018/05/16/Chapter28-A-More-Realistic-Example/</loc>
-    <lastmod>2018-05-16T03:48:31.646Z</lastmod>
+    <lastmod>2018-05-16T07:52:25.843Z</lastmod>
     <data>
         <display>
         <title>Chapter28.A More Realistic Example</title>
         <pubTime>2018-05-16T03:47:35.000Z</pubTime>
         
-        <tag>Learning Python</tag>
+        <tag>Python</tag>
          
          
            
+             
+              <breadCrumb title="Learning Python" url="http://KunKin.github.io/khunkin.github.io/categories/Learning-Python/"/>
+          
         </display>
     </data>
     </url>
@@ -39,16 +65,19 @@
     
   <url>
     <loc>http://KunKin.github.io/khunkin.github.io/2018/05/16/Chapter19-Advanced-Function-Topics/</loc>
-    <lastmod>2018-05-16T03:48:04.139Z</lastmod>
+    <lastmod>2018-05-16T07:52:15.170Z</lastmod>
     <data>
         <display>
         <title>Chapter19.Advanced Function Topics</title>
         <pubTime>2018-05-16T03:47:07.000Z</pubTime>
         
-        <tag>Learning Python</tag>
+        <tag>Python</tag>
          
          
            
+             
+              <breadCrumb title="Learning Python" url="http://KunKin.github.io/khunkin.github.io/categories/Learning-Python/"/>
+          
         </display>
     </data>
     </url>
@@ -56,29 +85,19 @@
     
   <url>
     <loc>http://KunKin.github.io/khunkin.github.io/2018/05/16/Chapter14-Iterations-and-Comprehensions/</loc>
-    <lastmod>2018-05-16T03:43:49.721Z</lastmod>
+    <lastmod>2018-05-16T07:51:47.696Z</lastmod>
     <data>
         <display>
-        <title></title>
-        <pubTime>2018-05-16T03:42:15.082Z</pubTime>
+        <title>Chapter14-Iterations-and-Comprehensions</title>
+        <pubTime>2018-05-16T07:50:41.000Z</pubTime>
         
+        <tag>Python</tag>
+         
          
            
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://KunKin.github.io/khunkin.github.io/2018/05/16/Permutation/</loc>
-    <lastmod>2018-05-16T03:38:57.823Z</lastmod>
-    <data>
-        <display>
-        <title>Permutation</title>
-        <pubTime>2018-05-16T03:36:29.000Z</pubTime>
-        
-         
-           
+             
+              <breadCrumb title="Learning Python" url="http://KunKin.github.io/khunkin.github.io/categories/Learning-Python/"/>
+          
         </display>
     </data>
     </url>
@@ -86,7 +105,7 @@
     
   <url>
     <loc>http://KunKin.github.io/khunkin.github.io/2017/12/01/hello-world/</loc>
-    <lastmod>2017-12-03T07:41:29.682Z</lastmod>
+    <lastmod>2018-05-16T07:45:58.583Z</lastmod>
     <data>
         <display>
         <title>Hello World</title>

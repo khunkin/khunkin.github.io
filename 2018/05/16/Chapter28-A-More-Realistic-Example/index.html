@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Learning Python," />
+  <meta name="keywords" content="Python," />
 
 
 
@@ -82,14 +82,14 @@
 
 
 <meta name="description" content="前言：正如章题所言，本章中我们将建立一个类集(set of classes)，以实现一些具体的东西——记录和处理有关人的信息。在后面我们将会看到，我们所说的实例(instance)和类(class) 能够起到与传统术语中的记录(record)和规划(program)一样的作用。 Python的类系统实际上主要只是在对象">
-<meta name="keywords" content="Learning Python">
+<meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Chapter28.A More Realistic Example">
 <meta property="og:url" content="http://KunKin.github.io/2018/05/16/Chapter28-A-More-Realistic-Example/index.html">
 <meta property="og:site_name" content="KhunKin的书斋">
 <meta property="og:description" content="前言：正如章题所言，本章中我们将建立一个类集(set of classes)，以实现一些具体的东西——记录和处理有关人的信息。在后面我们将会看到，我们所说的实例(instance)和类(class) 能够起到与传统术语中的记录(record)和规划(program)一样的作用。 Python的类系统实际上主要只是在对象树中搜索属性，伴随着一个特别的 函数的第一个参数。(Despite its sy">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2018-05-16T03:48:31.646Z">
+<meta property="og:updated_time" content="2018-05-16T07:52:25.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter28.A More Realistic Example">
 <meta name="twitter:description" content="前言：正如章题所言，本章中我们将建立一个类集(set of classes)，以实现一些具体的东西——记录和处理有关人的信息。在后面我们将会看到，我们所说的实例(instance)和类(class) 能够起到与传统术语中的记录(record)和规划(program)一样的作用。 Python的类系统实际上主要只是在对象树中搜索属性，伴随着一个特别的 函数的第一个参数。(Despite its sy">
@@ -138,9 +138,6 @@
 
 
 
-  
-  <script type="text/javascript" color="0,0,255" opacity='0.5' zIndex="-2" count="80"  src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
-  
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -308,6 +305,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/khunkin.github.io/categories/Learning-Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Learning Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -337,6 +356,7 @@
       
         <p>前言：正如章题所言，本章中我们将建立一个类集(set of classes)，以实现一些具体的东西——记录和处理有关人的信息。在后面我们将会看到，我们所说的实例(instance)和类(class) 能够起到与传统术语中的记录(record)和规划(program)一样的作用。</p>
 <p>Python的类系统实际上主要只是在对象树中搜索属性，伴随着一个特别的 函数的第一个参数。(Despite its syntax details, Python’s class system really is largely just a matter of searching for an attribute in a tree of objects, along with a special first argument for functions.)</p>
+<a id="more"></a> 
 <hr>
 <h3 id="第一步：制作实例-Making-Instance"><a href="#第一步：制作实例-Making-Instance" class="headerlink" title="第一步：制作实例(Making Instance)"></a>第一步：制作实例(Making Instance)</h3><h4 id="声明类"><a href="#声明类" class="headerlink" title="声明类"></a>声明类</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># File person.py (start)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span> <span class="comment"># Start a class</span></span><br></pre></td></tr></table></figure>
 <h4 id="构造方法（constructor-method）"><a href="#构造方法（constructor-method）" class="headerlink" title="构造方法（constructor method）"></a>构造方法（constructor method）</h4><p>​    实例对象属性通常是这么创建的：赋值给类的方法函数(method function)中的self属性。 为实例属性赋初始值的常规方式是在__init__构造方法中将它们分配给self，__init__构造方法中包含了每次创建实例时Python都会自动运行的代码：</p>
@@ -578,7 +598,7 @@
       
         <div class="post-tags">
           
-            <a href="/khunkin.github.io/tags/Learning-Python/" rel="tag"># Learning Python</a>
+            <a href="/khunkin.github.io/tags/Python/" rel="tag"># Python</a>
           
         </div>
       
@@ -691,13 +711,22 @@
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/khunkin.github.io/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分類</span>
+                </a>
+              </div>
+            
 
             
               
               
               <div class="site-state-item site-state-tags">
                 <a href="/khunkin.github.io/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">標籤</span>
                 </a>
               </div>
@@ -824,8 +853,6 @@
   
 
 
-  
-
 
 
 
@@ -864,11 +891,6 @@
   
   
     <script type="text/javascript" src="/khunkin.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/khunkin.github.io/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
