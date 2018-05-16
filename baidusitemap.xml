@@ -4,6 +4,66 @@
 
     
   <url>
+    <loc>http://KunKin.github.io/khunkin.github.io/2018/05/16/Chapter14-Iterations-and-Comprehensions/</loc>
+    <lastmod>2018-05-16T13:19:39.639Z</lastmod>
+    <data>
+        <display>
+        <title>Chapter14-Iterations-and-Comprehensions</title>
+        <pubTime>2018-05-16T07:50:41.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Learning Python" url="http://KunKin.github.io/khunkin.github.io/categories/Learning-Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://KunKin.github.io/khunkin.github.io/2018/05/16/Chapter28-A-More-Realistic-Example/</loc>
+    <lastmod>2018-05-16T13:18:11.531Z</lastmod>
+    <data>
+        <display>
+        <title>Chapter28.A More Realistic Example</title>
+        <pubTime>2018-05-16T03:47:35.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Learning Python" url="http://KunKin.github.io/khunkin.github.io/categories/Learning-Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://KunKin.github.io/khunkin.github.io/2018/05/16/Chapter19-Advanced-Function-Topics/</loc>
+    <lastmod>2018-05-16T13:13:48.416Z</lastmod>
+    <data>
+        <display>
+        <title>Chapter19.Advanced Function Topics</title>
+        <pubTime>2018-05-16T03:47:07.000Z</pubTime>
+        
+        <tag>Python</tag>
+         
+         
+           
+             
+              <breadCrumb title="Learning Python" url="http://KunKin.github.io/khunkin.github.io/categories/Learning-Python/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://KunKin.github.io/khunkin.github.io/2018/05/16/Permutation/</loc>
     <lastmod>2018-05-16T07:53:19.319Z</lastmod>
     <data>
@@ -37,66 +97,6 @@
            
              
               <breadCrumb title="Learning MySQL" url="http://KunKin.github.io/khunkin.github.io/categories/Learning-MySQL/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://KunKin.github.io/khunkin.github.io/2018/05/16/Chapter28-A-More-Realistic-Example/</loc>
-    <lastmod>2018-05-16T07:52:25.843Z</lastmod>
-    <data>
-        <display>
-        <title>Chapter28.A More Realistic Example</title>
-        <pubTime>2018-05-16T03:47:35.000Z</pubTime>
-        
-        <tag>Python</tag>
-         
-         
-           
-             
-              <breadCrumb title="Learning Python" url="http://KunKin.github.io/khunkin.github.io/categories/Learning-Python/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://KunKin.github.io/khunkin.github.io/2018/05/16/Chapter19-Advanced-Function-Topics/</loc>
-    <lastmod>2018-05-16T07:52:15.170Z</lastmod>
-    <data>
-        <display>
-        <title>Chapter19.Advanced Function Topics</title>
-        <pubTime>2018-05-16T03:47:07.000Z</pubTime>
-        
-        <tag>Python</tag>
-         
-         
-           
-             
-              <breadCrumb title="Learning Python" url="http://KunKin.github.io/khunkin.github.io/categories/Learning-Python/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://KunKin.github.io/khunkin.github.io/2018/05/16/Chapter14-Iterations-and-Comprehensions/</loc>
-    <lastmod>2018-05-16T07:51:47.696Z</lastmod>
-    <data>
-        <display>
-        <title>Chapter14-Iterations-and-Comprehensions</title>
-        <pubTime>2018-05-16T07:50:41.000Z</pubTime>
-        
-        <tag>Python</tag>
-         
-         
-           
-             
-              <breadCrumb title="Learning Python" url="http://KunKin.github.io/khunkin.github.io/categories/Learning-Python/"/>
           
         </display>
     </data>

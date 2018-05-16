@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-tw">
+<html class="theme-next pisces use-motion" lang="zh-tw">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="KhunKin的书斋">
 <meta property="og:description" content="前言：这一章主要是讲迭代（迭代器以及可迭代对象） 和 推导式（comprehension） comprehension 就是 类似于list(x for x in object) 这种 iteration 包括 Iterator  和 Iterable 的对象，以及各种迭代器的使用，其中配合comprehension的话迭代器能发挥更多作用">
 <meta property="og:locale" content="zh-tw">
-<meta property="og:updated_time" content="2018-05-16T07:51:47.696Z">
+<meta property="og:updated_time" content="2018-05-16T13:19:39.639Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter14-Iterations-and-Comprehensions">
 <meta name="twitter:description" content="前言：这一章主要是讲迭代（迭代器以及可迭代对象） 和 推导式（comprehension） comprehension 就是 类似于list(x for x in object) 这种 iteration 包括 Iterator  和 Iterable 的对象，以及各种迭代器的使用，其中配合comprehension的话迭代器能发挥更多作用">
@@ -100,7 +100,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/khunkin.github.io/',
-    scheme: 'Muse',
+    scheme: 'Pisces',
     version: '5.1.3',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -374,7 +374,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> line <span class="keyword">in</span> open(<span class="string">'script2.py'</span>): <span class="comment"># Use file iterators to read by lines</span></span><br><span class="line"><span class="meta">... </span>print(line.upper(), end=<span class="string">''</span>) <span class="comment"># Calls __next__, catches StopIteration</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> line <span class="keyword">in</span> open(<span class="string">'script2.py'</span>).readlines(): <span class="comment">#Notice that "readlines" has a "s"</span></span><br><span class="line"><span class="meta">... </span>print(line.upper(), end=<span class="string">''</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = open(<span class="string">'script2.py'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line"><span class="meta">... </span>line = f.readline()</span><br><span class="line"><span class="meta">... </span><span class="keyword">if</span> <span class="keyword">not</span> line: <span class="keyword">break</span></span><br><span class="line"><span class="meta">... </span>print(line.upper(), end=<span class="string">''</span>)</span><br></pre></td></tr></table></figure>
-<p>①：注意 print 用了一个 end=’ ‘，用来阻止Python在行末加’\n’——因为读入的语句中已经有一个’\n’了。事实上，①的方法是最好的逐行读取文本文的方法：1、编码简单；2、快；3、占用内存空间少</p>
+<p>①：注意 print 用了一个 <code>end=&#39; &#39;</code>，用来阻止Python在行末加’\n’——因为读入的语句中已经有一个’\n’了。事实上，①的方法是最好的逐行读取文本文的方法：1、编码简单；2、快；3、占用内存空间少</p>
 <p>②中readline不是最好的选择，还占用很多内存空间（because this version really does load the entire file into memory all at once, it will not even work for files too big to fit into the memory space available on your computer.）</p>
 <p>③中的while循环比基于迭代器（iterator-based）的for循环慢，因为在Python中迭代器（iterator）是以C语言的速度运行的，而③中的while循环是在Python虚拟机中以Python字节码运行的</p>
 <p>综上：用①就好了，忘了②③吧</p>
@@ -730,7 +730,7 @@
 
 
 
-  <div class="theme-info">主題 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+  <div class="theme-info">主題 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
 
 
 
@@ -829,6 +829,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/khunkin.github.io/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/khunkin.github.io/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
 
   
   <script type="text/javascript" src="/khunkin.github.io/js/src/scrollspy.js?v=5.1.3"></script>
