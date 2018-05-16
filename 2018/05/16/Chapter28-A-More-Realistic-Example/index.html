@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-tw">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/khunkin.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/khunkin.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/khunkin.github.io/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/khunkin.github.io/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/khunkin.github.io/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/khunkin.github.io/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/khunkin.github.io/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Learning Python," />
+
+
+
+
+
+  <link rel="alternate" href="/khunkin.github.io/atom.xml" title="KhunKin的书斋" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言：正如章题所言，本章中我们将建立一个类集(set of classes)，以实现一些具体的东西——记录和处理有关人的信息。在后面我们将会看到，我们所说的实例(instance)和类(class) 能够起到与传统术语中的记录(record)和规划(program)一样的作用。 Python的类系统实际上主要只是在对象">
+<meta name="keywords" content="Learning Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chapter28.A More Realistic Example">
+<meta property="og:url" content="http://KunKin.github.io/2018/05/16/Chapter28-A-More-Realistic-Example/index.html">
+<meta property="og:site_name" content="KhunKin的书斋">
+<meta property="og:description" content="前言：正如章题所言，本章中我们将建立一个类集(set of classes)，以实现一些具体的东西——记录和处理有关人的信息。在后面我们将会看到，我们所说的实例(instance)和类(class) 能够起到与传统术语中的记录(record)和规划(program)一样的作用。 Python的类系统实际上主要只是在对象树中搜索属性，伴随着一个特别的 函数的第一个参数。(Despite its sy">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:updated_time" content="2018-05-16T03:48:31.646Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter28.A More Realistic Example">
+<meta name="twitter:description" content="前言：正如章题所言，本章中我们将建立一个类集(set of classes)，以实现一些具体的东西——记录和处理有关人的信息。在后面我们将会看到，我们所说的实例(instance)和类(class) 能够起到与传统术语中的记录(record)和规划(program)一样的作用。 Python的类系统实际上主要只是在对象树中搜索属性，伴随着一个特别的 函数的第一个参数。(Despite its sy">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/khunkin.github.io/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://KunKin.github.io/2018/05/16/Chapter28-A-More-Realistic-Example/"/>
+
+
+
+
+
+  <title>Chapter28.A More Realistic Example | KhunKin的书斋</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" color="0,0,255" opacity='0.5' zIndex="-2" count="80"  src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/khunkin.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KhunKin的书斋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/khunkin.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/khunkin.github.io/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/khunkin.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/khunkin.github.io/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/khunkin.github.io/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            關於
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://KunKin.github.io/khunkin.github.io/2018/05/16/Chapter28-A-More-Realistic-Example/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Deng kunquan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/khunkin.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KhunKin的书斋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Chapter28.A More Realistic Example</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-05-16T11:47:35+08:00">
+                2018-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前言：正如章题所言，本章中我们将建立一个类集(set of classes)，以实现一些具体的东西——记录和处理有关人的信息。在后面我们将会看到，我们所说的实例(instance)和类(class) 能够起到与传统术语中的记录(record)和规划(program)一样的作用。</p>
+<p>Python的类系统实际上主要只是在对象树中搜索属性，伴随着一个特别的 函数的第一个参数。(Despite its syntax details, Python’s class system really is largely just a matter of searching for an attribute in a tree of objects, along with a special first argument for functions.)</p>
+<hr>
+<h3 id="第一步：制作实例-Making-Instance"><a href="#第一步：制作实例-Making-Instance" class="headerlink" title="第一步：制作实例(Making Instance)"></a>第一步：制作实例(Making Instance)</h3><h4 id="声明类"><a href="#声明类" class="headerlink" title="声明类"></a>声明类</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># File person.py (start)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span> <span class="comment"># Start a class</span></span><br></pre></td></tr></table></figure>
+<h4 id="构造方法（constructor-method）"><a href="#构造方法（constructor-method）" class="headerlink" title="构造方法（constructor method）"></a>构造方法（constructor method）</h4><p>​    实例对象属性通常是这么创建的：赋值给类的方法函数(method function)中的self属性。 为实例属性赋初始值的常规方式是在__init__构造方法中将它们分配给self，__init__构造方法中包含了每次创建实例时Python都会自动运行的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Add record field initialization</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, job, pay)</span>:</span> <span class="comment"># Constructor takes three arguments</span></span><br><span class="line">        self.name = name <span class="comment"># Fill out fields when created</span></span><br><span class="line">        self.job = job <span class="comment"># self is the new instance object</span></span><br><span class="line">        self.pay = pay</span><br></pre></td></tr></table></figure>
+<p>这是一种非常常见的编码模式：我们将要附加到instance的数据作为参数传递给构造函数方法，并将它们分配给自身以永久保留它们。<br>从面向对象的角度来说，self是新创建的实例对象，name，job和pay成为保存在对象上的状态信息——供以后使用的描述性数据。 尽管其他技术（例如封闭作用域引用闭包）也可以节省细节，但实例属性使其非常明确且易于理解。</p>
+<p>注意，self.job 是类的属性，而job是__init__函数范围内的变量，两者同名而异出。通过把局部变量job的值赋给self.job 属性，可以把传参存在对象里以供之后使用。</p>
+<p>一般来说，在Python里一定要明了：一个name在哪里被分配，或者这个name被赋值给了什么对象。</p>
+<p>事实上，__init__函数虽然名字奇怪(wired)，但是它只是一个普通的函数，正如同一般的函数一样，我们能够给它的参数们提供的默认值(default)，这样就可以防止它们的值不可用(unavailable)或者没用(unuseful)：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, job=None, pay=<span class="number">0</span>)</span>:</span> <span class="comment"># Normal function args</span></span><br><span class="line">		self.name = name</span><br><span class="line"> 	 	self.job = job</span><br><span class="line">		self.pay = pay</span><br></pre></td></tr></table></figure>
+<h4 id="一边写一边测试"><a href="#一边写一边测试" class="headerlink" title="一边写一边测试"></a>一边写一边测试</h4><blockquote>
+<p>增量模型是把待开发的软件系统模块化，将每个模块作为一个增量组件，从而分批次地分析、设计、编码和测试这些增量组件。运用增量模型的软件开发过程是递增式的过程。相对于瀑布模型而言，采用增量模型进行开发，开发人员不需要一次性地把整个软件产品提交给用户，而是可以分批次进行提交。</p>
+</blockquote>
+<p>编程最好以增量模型的形式编程，进行单元测试。</p>
+<p>Python虽然有交互式的测试，但是它是很乏味的：每次都要重新导入模块并且重新输入测试样例。所以Python的交互式提示一般都是用来进行简单的一次性测试的。</p>
+<p>更加实质性的测试：在包含了要测试的对象的文件底部编写代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Add incremental self-test code</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, job=None, pay=<span class="number">0</span>)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.job = job</span><br><span class="line">        self.pay = pay</span><br><span class="line">        </span><br><span class="line">bob = Person(<span class="string">'Bob Smith'</span>) <span class="comment"># Test the class</span></span><br><span class="line">sue = Person(<span class="string">'Sue Jones'</span>, job=<span class="string">'dev'</span>, pay=<span class="number">100000</span>) <span class="comment"># Runs __init__ automatically</span></span><br><span class="line">print(bob.name, bob.pay) <span class="comment"># Fetch attached attributes</span></span><br><span class="line">print(sue.name, sue.pay) <span class="comment"># sue's and bob's attrs differ</span></span><br></pre></td></tr></table></figure>
+<p>注意到bob用了默认值；而sue在创建对象的时候用到了关键字参数(keyword argument)，当然也可以依靠位置来代替，不过用关键字有两个两个好处：1、关键字能提醒我们这个数据是什么；2、用关键字允许我们不按顺序地输入参数。</p>
+<p>上面那个例子的结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:\code&gt; person.py</span><br><span class="line">Bob Smith <span class="number">0</span></span><br><span class="line">Sue Jones <span class="number">100000</span></span><br></pre></td></tr></table></figure>
+<p>从技术上讲，Bob和Sue都是命名空间对象(namespace objects)，就像所有的类实例一样，它们都有自己独立的由类创建的状态信息副本。 因为类的每个实例都有自己的一组self属性，所以类以这种方式自然地记录多个对象的信息; 就像内置类型（如列表和字典）一样，类可以作为一种对象工厂(object factory)。</p>
+<p>上面的测试方法有个很大的缺陷：每次文件作为脚本运行并作为模块导入时，它的top-level print语句都会运行，因此如果我们在导入了这个文件中的这个类，那么每次导入文件时print语句也会跟着文件导入，于是每次导入文件时都会看到测试代码的输出。</p>
+<p>为了克服这个缺陷，我们使用__name__模块：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, job=None, pay=<span class="number">0</span>)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.job = job</span><br><span class="line">        self.pay = pay</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>: <span class="comment"># When run for testing only</span></span><br><span class="line">    <span class="comment"># self-test code</span></span><br><span class="line">    bob = Person(<span class="string">'Bob Smith'</span>)</span><br><span class="line">    sue = Person(<span class="string">'Sue Jones'</span>, job=<span class="string">'dev'</span>, pay=<span class="number">100000</span>)</span><br><span class="line">    print(bob.name, bob.pay)</span><br><span class="line">    print(sue.name, sue.pay)</span><br></pre></td></tr></table></figure>
+<p>上面这个文件作为top-level 脚本运行时，将运行测试语句，因为这时文件的__name__是__main__；</p>
+<p>而当文件作为一个类库(library of classes)被导入到其他文件时，测试语句将不会被运行，因为上面这个文件的__name__并不是__main__：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">C:\code&gt; person.py</span><br><span class="line">Bob Smith <span class="number">0</span></span><br><span class="line">Sue Jones <span class="number">100000</span></span><br><span class="line"></span><br><span class="line">C:\code&gt; python</span><br><span class="line">Python <span class="number">3.3</span><span class="number">.0</span> (v3<span class="number">.3</span><span class="number">.0</span>:bd8afb90ebf2, Sep <span class="number">29</span> <span class="number">2012</span>, <span class="number">10</span>:<span class="number">57</span>:<span class="number">17</span>) ...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> person</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="第二步：添加行为方法（Adding-Behavior-Methods）"><a href="#第二步：添加行为方法（Adding-Behavior-Methods）" class="headerlink" title="第二步：添加行为方法（Adding Behavior Methods）"></a>第二步：添加行为方法（Adding Behavior Methods）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Process embedded built-in types: strings, mutability</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, job=None, pay=<span class="number">0</span>)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.job = job</span><br><span class="line">        self.pay = pay</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    bob = Person(<span class="string">'Bob Smith'</span>)</span><br><span class="line">    sue = Person(<span class="string">'Sue Jones'</span>, job=<span class="string">'dev'</span>, pay=<span class="number">100000</span>)</span><br><span class="line">    print(bob.name, bob.pay)</span><br><span class="line">    print(sue.name, sue.pay)</span><br><span class="line">    print(bob.name.split()[<span class="number">-1</span>]) <span class="comment"># Extract object's last name</span></span><br><span class="line">    sue.pay *= <span class="number">1.10</span> <span class="comment"># Give this object a raise</span></span><br><span class="line">    print(<span class="string">'%.2f'</span> % sue.pay)</span><br></pre></td></tr></table></figure>
+<p>后三行是新加的，当它们运行的时候，我们将bob的姓(last name)提取了出来并通过基本数字操作修改她的薪资属性来支付薪水。某种意义上来说，sue也是一个可变对象，她的状态就像list一样在调用append后一样就地改变：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Bob Smith <span class="number">0</span></span><br><span class="line">Sue Jones <span class="number">100000</span></span><br><span class="line">Smith</span><br><span class="line"><span class="number">110000.00</span></span><br></pre></td></tr></table></figure>
+<p>但是这样子的代码并不是好主意，像这些类以外的（outside of the class）硬编码操作很可能会导致维护问题：当需要改变工作方式或薪酬时，需要搜索并更新每一个事件、修改多个副本等，而这些代码通常是分散的，频繁的变动几乎是必然的。所以我们需要写<strong>方法函数（coding method）</strong></p>
+<hr>
+<p><strong>编写方法（Coding Methods）</strong></p>
+<p>——<strong>encapsulation(封装)</strong></p>
+<p>​     在接口后面封装操作逻辑，使得每个操作在我们的程序中只编码一次。好处是：分解代码以消除冗余，从而优化可维护性；将operation转换为method可以将它们应用于类的任何实例，而不仅仅是那些被硬编码处理的实例。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Add methods to encapsulate operations for maintainability</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, job=None, pay=<span class="number">0</span>)</span>:</span></span><br><span class="line">		self.name = name</span><br><span class="line">		self.job = job</span><br><span class="line">		self.pay = pay</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">lastName</span><span class="params">(self)</span>:</span> <span class="comment"># Behavior methods</span></span><br><span class="line">		<span class="keyword">return</span> self.name.split()[<span class="number">-1</span>] <span class="comment"># self is implied subject</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">giveRaise</span><span class="params">(self, percent)</span>:</span></span><br><span class="line">		self.pay = int(self.pay * (<span class="number">1</span> + percent)) <span class="comment"># Must change here only</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">	bob = Person(<span class="string">'Bob Smith'</span>)</span><br><span class="line">    sue = Person(<span class="string">'Sue Jones'</span>, job=<span class="string">'dev'</span>, pay=<span class="number">100000</span>)</span><br><span class="line">    print(bob.name, bob.pay)</span><br><span class="line">    print(sue.name, sue.pay)</span><br><span class="line">    print(bob.lastName(), sue.lastName()) <span class="comment"># Use the new methods</span></span><br><span class="line">    sue.giveRaise(<span class="number">.10</span>) <span class="comment"># instead of hardcoding</span></span><br><span class="line">    print(sue.pay)</span><br></pre></td></tr></table></figure>
+<p>method只是普通的函数，它们附属于类并且被设计用来处理这些类的实例。</p>
+<p>这个instance是调用method的主体(subject)，并被自动传递给method的self参数。</p>
+<p>现在运行时，我们的文件输出与之前类似 - 我们大多只是重构了代码，以允许在未来更轻松地进行更改，而不会改变其行为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Bob Smith <span class="number">0</span></span><br><span class="line">Sue Jones <span class="number">100000</span></span><br><span class="line">Smith Jones</span><br><span class="line"><span class="number">110000</span></span><br></pre></td></tr></table></figure>
+<p>上例中有些问题：在加薪之后，现在的薪水仍然是一个整数 - 我们通过调用方法内置的int来将数学结果转换为整数，整数和浮点对象具有相同的接口并可在表达式中混合使用。我们可以用<code>round(N,2)</code>来四舍五入并保留cent、使用decimal类型确定精度、或将货币值存储为完整的浮点数并用<code>%.2f</code>或<code>{0:.2f}</code>格式化字符串来表现它们以显示cent。</p>
+<p>formats.py模块中的money函数可以显示逗号，美分和货币符号。</p>
+<p>Python通过自动将实例传递给方法的第一个参数（通常称为self）来告诉方法要处理哪个实例。</p>
+<p>• bob.lastName()，bob是传递给self的隐含主体(implied subject)。<br>• sue.lastName()，sue替换了self。</p>
+<p>最终效果是每一次调用，方法都获取了隐含主体(implied subject)的名(name).（The net effect is that the method fetches the name of the implied subject each time）</p>
+<p>此外，例中的<code>giveRaisse</code>方法假定了<code>percent</code>是以0到1之间的浮点数的形式传进来的，这个假设健壮性太差(1000%的加薪也不是没可能，但是1000%是10，输进去就是BUG了)。因此要注意考虑函数参数实际可能的范围。在后面的章节中会用到函数装饰器(function decorator)和断言(assert)语句，它们能够在开发过程中自动进行有效性测试。(顺带一提，单元测试也用到了assert)：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@rangetest(percent=(0.0, 1.0)) # Use decorator to validate</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">giveRaise</span><span class="params">(self, percent)</span>:</span></span><br><span class="line">	self.pay = int(self.pay * (<span class="number">1</span> + percent))</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="第三步：操作器重载"><a href="#第三步：操作器重载" class="headerlink" title="第三步：操作器重载"></a>第三步：操作器重载</h3><p>现在，我们有一个相当全面的类来生成和初始化实例，以及以method形式处理instance的两个新behavior。</p>
+<p>尽管如此，测试仍然不方便：为了跟踪我们的对象，我们必须手动获取并打印各个属性(individual attributes)。不幸的是，实例对象的默认显示格式不是很好——它显示对象的类名和内存地址（除了作为唯一标识符外，它在Python中基本上是无用的）。</p>
+<p>把脚本的最后一行改成<code>print(sue)</code>以便将对象表现为一个整体，于是我们将看到：<code>sue</code>是3.X中的“对象(object)”，是2.X中的“实例(instance)”:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Bob Smith <span class="number">0</span></span><br><span class="line">Sue Jones <span class="number">100000</span></span><br><span class="line">Smith Jones</span><br><span class="line">&lt;__main__.Person object at <span class="number">0x00000000029A0668</span>&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>提供打印显示</strong></p>
+<p>使用操作器重载能做得更好——在一个类里编写方法，这些方法能够在运行类的实例时，截取(intercept)和处理(process)内置操作。</p>
+<p>具体而言，我们可以利用Python中仅次于__init__的第二个最常用的运算符重载方法：__repr__方法和__str__方法。</p>
+<p>每当一个实例被转换成它的打印字符串（就是<code>&lt;__main__.Person object at 0x00000000029A0668&gt;</code>这种形式的）时，__repr__方法和__str__方法会被自动运行。</p>
+<p>因为这就是打印一个对象所做的事情，所以，如果该对象定义了一个对象自身(defines one itself)，或者继承了一个超类的话，那么净传递效果(the net transitive effect)是打印这个对象，这个对象会显示这个对象的__str__或__repr__方法返回的内容（无论返回了什么）。此外，双下划线名称将如同任何其他名称一样被继承。</p>
+<p>（Because that’s what printing an object does, the net transitive effect is that printing an object displays whatever is returned by the object’s __str__ or __repr__ method, if the object either defines one itself or inherits one from a superclass. Double-underscored names are inherited just like any other.）</p>
+<p>从技术上说，<code>__str__</code>优于<code>print</code>和<code>str</code>，并且<code>__repr__</code>被用作这些函数(<code>__str__</code>、<code>print</code>、<code>str</code>)以及所有其他上下文(context，译成”运行环境”会好点？)的备用(fallback)。虽然<code>__str__</code>和<code>__repr__</code>二者都可以用于在不同的context中实现不同的显示，但仅编写<code>__repr__</code>就足以在所有情况下给出单独的显示——打印、嵌套外观和交互式反馈(interactive echoes)。而<code>__str__</code>只有在有限的文章里才可以被用来作为替代显示（an alternative display）。</p>
+<p>我们已经编写的<code>__init__</code>构造函数方法严格来说也是操作符重载 - 它在构造时自动运行以初始化新创建的实例。 然而，构造函数非常普遍，这使得构造函数看起来几乎像一个特例。 像<code>__repr__</code>这样目标更明确(focused)的方法允许我们利用特定的操作并在我们的对象用于这些context时提供专门的行为(specialized behavior)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Add __repr__ overload method for printing objects</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, job=None, pay=<span class="number">0</span>)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.job = job</span><br><span class="line">        self.pay = pay</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lastName</span><span class="params">(self)</span>:</span></span><br><span class="line">    	<span class="keyword">return</span> self.name.split()[<span class="number">-1</span>]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">giveRaise</span><span class="params">(self, percent)</span>:</span></span><br><span class="line">    	self.pay = int(self.pay * (<span class="number">1</span> + percent))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span> 								<span class="comment"># Added method</span></span><br><span class="line">    	<span class="keyword">return</span> <span class="string">'[Person: %s, %s]'</span> % (self.name, self.pay)  <span class="comment"># String to print</span></span><br><span class="line">      </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    bob = Person(<span class="string">'Bob Smith'</span>)</span><br><span class="line">    sue = Person(<span class="string">'Sue Jones'</span>, job=<span class="string">'dev'</span>, pay=<span class="number">100000</span>)</span><br><span class="line">    print(bob)</span><br><span class="line">    print(sue)</span><br><span class="line">    print(bob.lastName(), sue.lastName())</span><br><span class="line">    sue.giveRaise(<span class="number">.10</span>)</span><br><span class="line">    print(sue)</span><br></pre></td></tr></table></figure>
+<p>注意，这里用了字符串的<code>%</code>格式化去构建在<code>__repr__</code>中的显示字符串。在底层，类会使用类似的build-in type objects and operations 去完成任务。在很大程度上，类只是添加了一个将功能和数据打包在一起并支持扩展的额外结构层(an additional layer of <em>structure</em>)。  </p>
+<p>本例还改变了我们的自测代码(self-test code)去直接输出整个对象，而不是打印个别属性。 运行时，输出(output)现在变得更加的连贯以及有意义; “[…]”行由我们的新<code>__repr__</code>返回，由<code>print</code>操作自动运行：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[Person: Bob Smith, <span class="number">0</span>]</span><br><span class="line">[Person: Sue Jones, <span class="number">100000</span>]</span><br><span class="line">Smith Jones</span><br><span class="line">[Person: Sue Jones, <span class="number">110000</span>]</span><br></pre></td></tr></table></figure>
+<p><strong>这样，利用对<code>__repr__</code>方法的重载，我们在别的文件中就能直接通过<code>print(ObjectName)</code>来获得对象的attribute。</strong></p>
+<p>设计注意事项：<code>__repr__</code>方法经常用于在提供一个代码的低级别对象显示，而<code>__str__</code>则用于更多user-friendly的信息显示。 有时类用<code>__str__</code>为用户友好的显示提供，用<code>__repr__</code>为开发人员提供额外的详细信息。 因为<code>print</code> 调用<code>__str__</code>，而交互式提示与<code>__repr__</code>相呼应，所以这可以为目标受众(target audiences)提供适当的显示。<br>由于<code>__repr__</code>适用于更多的展示案例，包括嵌套外表，并且由于我们对显示两种不同格式不感兴趣，因此全面的<code>__repr__</code>足以满足我们的课程。</p>
+<hr>
+<h3 id="第四步：用子类自定义行为-Customizing-Behavior-by-Subclassing"><a href="#第四步：用子类自定义行为-Customizing-Behavior-by-Subclassing" class="headerlink" title="第四步：用子类自定义行为(Customizing Behavior by Subclassing)"></a>第四步：用子类自定义行为(Customizing Behavior by Subclassing)</h3><p>现在这个类尚未用到的唯一一个OOP的主要概念是使用继承的自定义(customization by inheritance)。</p>
+<p>我们将定义一个父类/子类(superclass/subclass)关系，它允许扩展这个软件并将一些行为替换为继承行为。</p>
+<p><strong>编写子类</strong></p>
+<p>定义一个<code>Person</code>的子类:<code>Manager</code>，<code>Manager</code>用一个更有针对性的版本来替换被继承的<code>giveRaise</code>方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span><span class="params">(Person)</span>:</span> <span class="comment"># Define a subclass of Person</span></span><br></pre></td></tr></table></figure>
+<p>格式为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">subclass</span><span class="params">(superclass)</span>:</span> <span class="comment"># Define a subclass of Person</span></span><br></pre></td></tr></table></figure>
+<p>According to the inheritance search rules, the lowest version of the name wins：采用最低级别（父子关系中最低级别）的函数(跟Java一样)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span><span class="params">(Person)</span>:</span> <span class="comment"># Inherit Person attrs</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">giveRaise</span><span class="params">(self, percent, bonus=<span class="number">.10</span>)</span>:</span> <span class="comment"># Redefine to customize</span></span><br></pre></td></tr></table></figure>
+<p>下面是一个糟糕的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span><span class="params">(Person)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">giveRaise</span><span class="params">(self, percent, bonus=<span class="number">.10</span>)</span>:</span></span><br><span class="line">		self.pay = int(self.pay * (<span class="number">1</span> + percent + bonus)) <span class="comment"># Bad: cut and paste</span></span><br></pre></td></tr></table></figure>
+<p>这个例子中的函数内容仅仅是从父类中复制粘贴而来的。这与原来的运行结果一模一样，但是维护难度却加倍了了——比如要针对所有人员都修改提薪的方式(算法)，我们不仅需要修改父类，还要修改子类，这使得维护的工作量加倍了。</p>
+<p>好的例子应当是这样的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span><span class="params">(Person)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">giveRaise</span><span class="params">(self, percent, bonus=<span class="number">.10</span>)</span>:</span></span><br><span class="line">		Person.giveRaise(self, percent + bonus) <span class="comment"># Good: augment original</span></span><br></pre></td></tr></table></figure>
+<p>直接调用父类中的函数，那么要针对所有人员都修改提薪的方式(算法)时，直接修改父类中的函数就可以了。</p>
+<p>一个类的方法总是可以被实例调用（常见，Python通常会自动将实例发送到<code>self</code>变量）或者被类调用（不常见，必须手动传递该实例）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">instance.method(args...)</span><br></pre></td></tr></table></figure>
+<p>会被Python自动转换成等价的形式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span>.<span class="title">method</span><span class="params">(instance, args...)</span></span></span><br></pre></td></tr></table></figure>
+<p>通过类直接调用会严重地破坏继承，并且将调用级别在类树(class tree)提高了——为了运行一个特别的版本。在我们的例子中，我们可以使用这种技术在Person中调用默认的<code>GiveRaise</code>，尽管它已经在 Manager 级别上重新定义了。</p>
+<p>在某种意义上，我们必须通过Person调用，因为Manager的 <code>giveRaise</code> 代码中的<code>self.giveRaise()</code>会循环——因为 self 已经是 Manager，<code>self.giveRaise()</code>会再次解析为<code>Manager.giveRaise</code>，等等如此递归直到可用内存耗尽。</p>
+<p>（如果<code>Person.giveRaise</code>改成<code>self.giveRaise</code>那么就会出现： self.giveRaise(args…)  –&gt; Manager.giveRaise(self,args…) –&gt; self.giveRaise(self,args…) –&gt; ……）</p>
+<p>这种写法保证了我们想要能够执行标准的GiveRaise操作，只是做了一些额外的添加：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Add customization of one behavior in a subclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, job=None, pay=<span class="number">0</span>)</span>:</span></span><br><span class="line">    	self.name = name</span><br><span class="line">        self.job = job</span><br><span class="line">        self.pay = pay</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lastName</span><span class="params">(self)</span>:</span></span><br><span class="line">    	<span class="keyword">return</span> self.name.split()[<span class="number">-1</span>]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">giveRaise</span><span class="params">(self, percent)</span>:</span></span><br><span class="line">    	self.pay = int(self.pay * (<span class="number">1</span> + percent))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">    	<span class="keyword">return</span> <span class="string">'[Person: %s, %s]'</span> % (self.name, self.pay)</span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span><span class="params">(Person)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">giveRaise</span><span class="params">(self, percent, bonus=<span class="number">.10</span>)</span>:</span> <span class="comment"># Redefine at this level</span></span><br><span class="line">		Person.giveRaise(self, percent + bonus) <span class="comment"># Call Person's version</span></span><br><span class="line">        </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    bob = Person(<span class="string">'Bob Smith'</span>)</span><br><span class="line">    sue = Person(<span class="string">'Sue Jones'</span>, job=<span class="string">'dev'</span>, pay=<span class="number">100000</span>)</span><br><span class="line">    print(bob)</span><br><span class="line">    print(sue)</span><br><span class="line">    print(bob.lastName(), sue.lastName())</span><br><span class="line">    sue.giveRaise(<span class="number">.10</span>)</span><br><span class="line">    print(sue)</span><br><span class="line">    tom = Manager(<span class="string">'Tom Jones'</span>, <span class="string">'mgr'</span>, <span class="number">50000</span>) <span class="comment"># Make a Manager: __init__</span></span><br><span class="line">    tom.giveRaise(<span class="number">.10</span>) <span class="comment"># Runs custom version</span></span><br><span class="line">    print(tom.lastName()) <span class="comment"># Runs inherited method</span></span><br><span class="line">    print(tom) <span class="comment"># Runs inherited __repr__</span></span><br></pre></td></tr></table></figure>
+<p>说白了跟Java里的继承一样。</p>
+<p>Java程序员可能特别感兴趣的是知道Python也有一个super内置函数，允许更一般地回调父类的方法 。但是继承父类有很多缺点，因此使用要谨慎：一旦你继续进行多重继承，它不是你想象的那样，甚至超出了你所认为的范围。它所调用的类可能根本不是父类，甚至可能根据context而不同。或者改述一句电影台词：Python的父类就像一盒巧克力——你永远不知道你会得到什么！</p>
+<p><strong>行为的多态性</strong></p>
+<p>为了使这种对继承行为的捕获(acquisition of inherited behavior)更加清晰，我们可以在我们的文件末尾添加以下代码:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    ...</span><br><span class="line">    print(<span class="string">'--All three--'</span>)</span><br><span class="line">    <span class="keyword">for</span> obj <span class="keyword">in</span> (bob, sue, tom):		<span class="comment"># Process objects generically</span></span><br><span class="line">        obj.giveRaise(<span class="number">.10</span>)		    <span class="comment"># Run this object's giveRaise</span></span><br><span class="line">        print(obj)				   <span class="comment"># Run the common __repr__</span></span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[Person: Bob Smith, <span class="number">0</span>]</span><br><span class="line">[Person: Sue Jones, <span class="number">100000</span>]</span><br><span class="line">Smith Jones</span><br><span class="line">[Person: Sue Jones, <span class="number">110000</span>]</span><br><span class="line">Jones</span><br><span class="line">[Person: Tom Jones, <span class="number">60000</span>]</span><br><span class="line">--All three--</span><br><span class="line">[Person: Bob Smith, <span class="number">0</span>]</span><br><span class="line">[Person: Sue Jones, <span class="number">121000</span>]</span><br><span class="line">[Person: Tom Jones, <span class="number">72000</span>]</span><br></pre></td></tr></table></figure>
+<p>在添加的代码中，object是一个Person或者一个Manager，Python自动运行相应的<code>giveRaise</code>，<code>giveRaise</code>是根据对象的类型分派的。正如我们所知，多态性是Python灵活性的核心。</p>
+<p>另一方面，打印针对所有三个对象运行相同的<code>__repr__</code>，因为它只在Person中编码一次（Person）,而Manager负责的是特化和应用(specialize and apply)我们原先写在Person上的代码。虽然这个例子很小，但它已经利用OOP的定制和重用代码的天赋;有了类，这几乎像是自动的。</p>
+<p><strong>继承，定制以及拓展(Inherit, Customize, and Extend)</strong></p>
+<p>事实上，类可能比我们的例子更灵活。 通常，类可以inherit，customize或extend超类中的现有代码。 例如，尽管我们专注于customize，但如果Manager需要完全不同的东西（Python同名引用，Python namesake reference intended），我们还可以向Manager中添加不存在于Person中的特有(unique)方法。 在下例中，<code>giveRaise</code>重新定义了一个超类的方法来定制它，但是<code>someThingElse</code>定义了一些新的扩展方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lastName</span><span class="params">(self)</span>:</span> ...</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">giveRaise</span><span class="params">(self)</span>:</span> ...</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span> ...</span><br><span class="line">        </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span><span class="params">(Person)</span>:</span> 				   <span class="comment"># Inherit</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">giveRaise</span><span class="params">(self, ...)</span>:</span> ... 		<span class="comment"># Customize</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">someThingElse</span><span class="params">(self, ...)</span>:</span> ... 	<span class="comment"># Extend</span></span><br><span class="line">        </span><br><span class="line">tom = Manager()</span><br><span class="line">tom.lastName() 		<span class="comment"># Inherited verbatim</span></span><br><span class="line">tom.giveRaise() 	<span class="comment"># Customized version</span></span><br><span class="line">tom.someThingElse() <span class="comment"># Extension here</span></span><br><span class="line">print(tom) 			<span class="comment"># Inherited overload method</span></span><br></pre></td></tr></table></figure>
+<p><code>someThingElse</code>中定制的方法只能用被Manager类的对象使用，而对于非Manager的Person类对象来说是不能使用<code>someThingElse</code>的。</p>
+<p><strong>面向对象编程的主要观念(OOP: The Big Idea)</strong></p>
+<p>我们通过自定义已完成的内容进行编程，而不是复制或更改现有代码。总的来说，与其他方法相比，类所隐含的编程风格可以从根本上缩短开发时间。</p>
+<p>例如，在上面的例子中，理论上可以不需要子类化就实现一个自定义的<code>giveRaise</code>操作，但是其他选项产生的代码都不够优化：<br>​    •虽然我们可以简单地将Manager从头开始编码为新的独立代码，但我们必须重新实现Person中与Managers相同的所有行为。<br>​    •虽然我们可以简单地改变现有的Person 类，以满足Manager给予的要求，但这样做可能会破坏我们仍然需要原始Person behavior的地方。<br>​    •尽管我们可以简单地复制Person类的全部内容，将副本更名为Manager，并更改了<code>GiveRaise</code>，但这样做会导致代码冗余，从而加倍我们未来的工作量——将来对Person所做的更改不会被Manager自动pick up，而是必须手动传递(propagated)到Manager的代码里。复制粘贴方法现在看起来可能很快，但它将来会使您的工作翻倍。</p>
+<p>用类构建的可定制层次结构(customizable hierarchies)为随着时间推移而发展的软件提供了更好的解决方案。 Python中没有其他工具支持这种开发模式。因为我们可以通过编写新的子类来定制和扩展(tailor and extend)我们之前的工作，所以我们可以利用我们已经完成的工作，而不是每次从头开始，打破已有的工作，或者引入多个在将来可能需要更新的代码副本。如果用得好，OOP是程序员的一个强大盟友。</p>
+<hr>
+<h3 id="第五步：自定义构造函数-Customizing-Constructors-Too"><a href="#第五步：自定义构造函数-Customizing-Constructors-Too" class="headerlink" title="第五步：自定义构造函数(Customizing Constructors, Too)"></a>第五步：自定义构造函数(Customizing Constructors, Too)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># File person.py</span></span><br><span class="line"><span class="comment"># Add customization of constructor in a subclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, job=None, pay=<span class="number">0</span>)</span>:</span></span><br><span class="line">		self.name = name</span><br><span class="line">		self.job = job</span><br><span class="line">		self.pay = pay</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lastName</span><span class="params">(self)</span>:</span></span><br><span class="line">    	<span class="keyword">return</span> self.name.split()[<span class="number">-1</span>]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">giveRaise</span><span class="params">(self, percent)</span>:</span></span><br><span class="line">    	self.pay = int(self.pay * (<span class="number">1</span> + percent))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">    	<span class="keyword">return</span> <span class="string">'[Person: %s, %s]'</span> % (self.name, self.pay)</span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span><span class="params">(Person)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, pay)</span>:</span> 				<span class="comment"># Redefine constructor</span></span><br><span class="line">		Person.__init__(self, name, <span class="string">'mgr'</span>, pay)  <span class="comment"># Run original with 'mgr'</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">giveRaise</span><span class="params">(self, percent, bonus=<span class="number">.10</span>)</span>:</span></span><br><span class="line">		Person.giveRaise(self, percent + bonus)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    bob = Person(<span class="string">'Bob Smith'</span>)</span><br><span class="line">    sue = Person(<span class="string">'Sue Jones'</span>, job=<span class="string">'dev'</span>, pay=<span class="number">100000</span>)</span><br><span class="line">    print(bob)</span><br><span class="line">    print(sue)</span><br><span class="line">    print(bob.lastName(), sue.lastName())</span><br><span class="line">    sue.giveRaise(<span class="number">.10</span>)</span><br><span class="line">    print(sue)</span><br><span class="line">    tom = Manager(<span class="string">'Tom Jones'</span>, <span class="number">50000</span>) 			 <span class="comment"># Job name not needed:</span></span><br><span class="line">    tom.giveRaise(<span class="number">.10</span>) 						    <span class="comment"># Implied/set by class</span></span><br><span class="line">    print(tom.lastName())</span><br><span class="line">    print(tom)</span><br></pre></td></tr></table></figure>
+<p>子类中定制构造函数</p>
+<p>虽然构造函数有一个奇怪的名字，但效果是一样的。因为我们也需要Person的构建逻辑来运行（初始化实例属性），所以我们必须这样调用它;否则，实例不会附加任何属性。</p>
+<p>从重定义(redefine)中调用超类的构造函数，这种方式证明是Python中常见的编码模式。Python使用继承来查找并在构造时只调用类树中最底层的那个<code>__init__</code>方法。如果你需要更高级的<code>__init__</code>方法在构造时运行（通常你会这样做），你必须手动调用它们，一般是通过超类的名字来调用它们。这样做的好处是可以清楚地知道将哪个参数传递给超类的构造函数，并且可以选择根本不调用它：不调用超类构造函数可以让你完全替代它的逻辑，而不是增强它。<br>这个文件的自测代码的输出和以前一样 - 我们没有改变它的功能，我们只是简单地重组来消除一些逻辑冗余：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[Person: Bob Smith, <span class="number">0</span>]</span><br><span class="line">[Person: Sue Jones, <span class="number">100000</span>]</span><br><span class="line">Smith Jones</span><br><span class="line">[Person: Sue Jones, <span class="number">110000</span>]</span><br><span class="line">Jones</span><br><span class="line">[Person: Tom Jones, <span class="number">60000</span>]</span><br></pre></td></tr></table></figure>
+<p><strong>面向对象编程比你想象的更加简单(OOP Is Simpler Than You May Think)</strong></p>
+<p>本章到这里已经介绍了Python 中OOP机制(machinery)的所有重要概念:</p>
+<p>·创建实例——填写实例属性</p>
+<p>·行为方法——将逻辑封装在类的方法中</p>
+<p>·操作重载——为内置操作（如print）提供行为</p>
+<p>·定制行为——在子类中重新定义方法以对它们进行专门化</p>
+<p>·定制构造器—为超类步骤添加初始化逻辑</p>
+<p><em>**</em>注意：重载和定制看着很像（都是改变既定方法），但是在概念上有所区别</p>
+<p>这些概念大多基于三个简单的观点：对象树中属性的继承搜索(the inheritance search<br>for attributes in object trees)；方法中特别的self变量；操作重载对方法的自动调度(dispatch)。</p>
+<p>我们还通过利用(harnessing)类的分解代码倾向(propensity for factoring code)来减少冗余(redundancy)，使我们的代码在将来更易于更改。例如，我们在方法中封装了逻辑，并从扩展中调用回超类方法，以避免具有相同代码的多个副本。这些步骤中的大部分都是阶级结构化力量的自然结果。<br>总的来说，这就是Python中的OOP。类肯定会变得比这更大，并且还有一些更高级的类概念，比如装饰器(decorators)和元类(metaclasses)，我们将在后面的章节中讨论这些概念。然而，就基础知识而言，我们的课程已经完成了这一切。事实上，如果你已经掌握了我们编写的类的工作方式，那么大多数OOP Python代码现在应该在你的范围之内。</p>
+<p><strong>组合类的其他方式(Other Ways to Combine Classes)</strong></p>
+<p>虽然OOP的基本机制在Python中很简单，但在较大程序中，将类放在一起的方式也是一种艺术。此前我们关注继承，是因为它是Python提供的机制，但是也有其他方式来组合class。</p>
+<p>例如，有一种常见的编码模式，就涉及到将对象嵌套在一起以构建组合(composite)。这更多是与设计有关而非与Python。作为一个简单的例子，我们可以通过嵌入一个Person(而非继承)来使用这个组合思想，从而拓展Manager。</p>
+<p>下面的代码在文件person-composite.py中编码，通过使用<code>__getattr__</code>操作的重载方法来拦截未定义的属性提取(attribute fetches)，并用内置的getattr将它们交给嵌入对象。 通过getattr调用获取属性与通过  “X.Y” 形式(如 Tom.job)获取属性相同，并且因此表现出继承，区别在于属性名称Y是一个运行时字符串(runtime string)。<br>通过结合这些工具，这里的giveRaise方法仍然通过改变传递给嵌入对象的参数来实现定制。实际上，Manager成为一个控制层，将调用传递给(down to)嵌入对象，而不是超类方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># File person-composite.py</span></span><br><span class="line"><span class="comment"># Embedding-based Manager alternative</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">	...same...</span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, pay)</span>:</span></span><br><span class="line">    	self.person = Person(name, <span class="string">'mgr'</span>, pay) <span class="comment"># Embed a Person object</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">giveRaise</span><span class="params">(self, percent, bonus=<span class="number">.10</span>)</span>:</span></span><br><span class="line">    	self.person.giveRaise(percent + bonus) <span class="comment"># Intercept and delegate</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span><span class="params">(self, attr)</span>:</span></span><br><span class="line">    	<span class="keyword">return</span> getattr(self.person, attr) 	   <span class="comment"># Delegate all other attrs</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">    	<span class="keyword">return</span> str(self.person) 			  <span class="comment"># Must overload again (in 3.X)</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">	...same...</span><br></pre></td></tr></table></figure>
+<p>这个Manager替代方案代表了一种通常称为<strong>委托(delegation)</strong>的通用编码模式——一种基于组合的结构，用于管理被包装的对象(wrapped object)并向其发送(propagate)方法调用。</p>
+<p>这个模式适用于我们的例子，但它需要大约两倍的代码，并且对于我们想要直接表达的直接自定义类型而言，不如继承合适(is less well suited than inheritance to the kinds of direct customizations we meant to express)。</p>
+<p>在这里，Manager并不是真正的Person，所以我们需要用额外的代码来手动将方法调用分发给嵌入对象；运算符重载方法（如<code>__repr__</code>）必须重新定义；并且添加新的管理器行为并不那么直接，因为状态信息被删除了一个级别。</p>
+<p>尽管如此，当嵌入对象需要与容器进行比direct customization所表明的交互更有限的交互时，对象嵌入(object embedding)和基于对象嵌入的设计模式(design patterns)能够很好地吻合。</p>
+<p> 例如，如果我们想要将类适应到它不支持的预期接口，或者跟踪或验证对另一个对象方法的调用，那么像这样的控制器层或代理(controller layer or proxy)可能会派上用场。</p>
+<p>此外，假设的Department类可以聚合(aggregate)其他对象，以便将它们作为一组来处理:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># File person-department.py</span></span><br><span class="line"><span class="comment"># Aggregate embedded objects into a composite</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">	...same...</span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span><span class="params">(Person)</span>:</span></span><br><span class="line">	...same...</span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Department</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, *args)</span>:</span></span><br><span class="line">    	self.members = list(args)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">addMember</span><span class="params">(self, person)</span>:</span></span><br><span class="line">    	self.members.append(person)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">giveRaises</span><span class="params">(self, percent)</span>:</span></span><br><span class="line">    	<span class="keyword">for</span> person <span class="keyword">in</span> self.members:</span><br><span class="line">    		person.giveRaise(percent)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">showAll</span><span class="params">(self)</span>:</span></span><br><span class="line">    	<span class="keyword">for</span> person <span class="keyword">in</span> self.members:</span><br><span class="line">			print(person)</span><br><span class="line">            </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">	bob = Person(<span class="string">'Bob Smith'</span>)</span><br><span class="line">    sue = Person(<span class="string">'Sue Jones'</span>, job=<span class="string">'dev'</span>, pay=<span class="number">100000</span>)</span><br><span class="line">    tom = Manager(<span class="string">'Tom Jones'</span>, <span class="number">50000</span>)</span><br><span class="line">    </span><br><span class="line">    development = Department(bob, sue) 	<span class="comment"># Embed objects in a composite</span></span><br><span class="line">    development.addMember(tom)</span><br><span class="line">    development.giveRaises(<span class="number">.10</span>) 		<span class="comment"># Runs embedded objects' giveRaise</span></span><br><span class="line">    development.showAll() 				<span class="comment"># Runs embedded objects' __repr__</span></span><br></pre></td></tr></table></figure>
+<p>运行时，Department的<code>showAll</code>方法能够列出当前状态下部门中所有人的信息:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Person: Bob Smith, <span class="number">0</span>]</span><br><span class="line">[Person: Sue Jones, <span class="number">110000</span>]</span><br><span class="line">[Person: Tom Jones, <span class="number">60000</span>]</span><br></pre></td></tr></table></figure>
+<p>在Python 3.X中，以及在启用3.X的“new style”类的2.X中时，我们在本章编写的文件person-composite.py的另一个基于委托(delegation-based)的Manager类，如果不重新定义运算符的重载方法属性，将不能够 拦截并委托(intercept and delegate) 运算符的重载方法属性(operator<br>overloading method attributes)（如<code>__repr__</code>）。虽然我们知道<code>__repr__</code>是我们具体示例中唯一使用的名称，但这对于基于委托的类来说是一个普遍问题。</p>
+<p>回想一下，诸如打印和添加等内置操作隐式地调用操作符重载方法，如<code>__repr__</code>和<code>__add__</code>。在3.X的新样式类(new-style classes)中，像这样的内置操作不会通过通用属性管理器(generic attribute manager)来路由(route)它们的隐式属性提取：既不调用<code>__getattr__</code>（运行未定义的属性）也不调用<code>__getattribute__</code>（针对所有属性运行）。这就是为什么我们必须在替代管理器中重新定义<code>__repr__</code>以确保将打印路由到3.X中的嵌入式Person对象。</p>
+<p>在上上个例子中注释掉<code>__repr__</code>方法，输出变成了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">c:\code&gt; py −<span class="number">3</span> person-composite.py</span><br><span class="line">[Person: Bob Smith, <span class="number">0</span>]</span><br><span class="line">...etc...</span><br><span class="line">&lt;__main__.Manager object at <span class="number">0x00000000029AA8D0</span>&gt;</span><br><span class="line"></span><br><span class="line">c:\code&gt; py −<span class="number">2</span> person-composite.py</span><br><span class="line">[Person: Bob Smith, <span class="number">0</span>]</span><br><span class="line">...etc...</span><br><span class="line">[Person: Tom Jones, <span class="number">60000</span>]</span><br></pre></td></tr></table></figure>
+<p>从技术上讲，这是因为内置操作在2.X的默认经典类中开始隐式搜索实例中的方法名称，但从3.X强制的new-style classes开始，完全跳过实例。相比之下，显式的名称属性提取总是首先在两个模型中路由到实例。在2.X经典类中，内置路由属性也是这种方式——打印，例如，路由<code>__repr__</code>到<code>__getattr__</code>。这就是为什么对Manager作注释的<code>__repr__</code>在2.X中没有效果：该调用委托给了Person。new-style classes也从它们的自动对象(automatic object)的超类中继承了<code>__repr__</code>的默认值，这会阻止<code>__getattr__</code>，但new-style的<code>__getattribute__</code>不会拦截该名称。</p>
+<hr>
+<h3 id="第六步：使用自检工具-Using-Introspection-Tools"><a href="#第六步：使用自检工具-Using-Introspection-Tools" class="headerlink" title="第六步：使用自检工具(Using Introspection Tools)"></a>第六步：使用自检工具(Using Introspection Tools)</h3><p>现在我们完成并演示了Python OOP的大部分基础。但是还有一点小问题：</p>
+<p>·第一，print(Tom)出来的是Person而非更具体的Manager，从技术上来说这是不对的：不够精确。</p>
+<p>·第二，也是更重要的：当前的显示格式只显示了我们在<code>__repr__</code>中包含的属性，这对拓展是不利的，或许解释不了未来的目标。例如，我们还不能验证tom的job名称是否已由Manager的构造函数正确设置为mgr，因为我们为Person编码的<code>__repr__</code>不打印此字段。 更糟糕的是，如果我们在<code>__init__</code>中扩展或以其他方式更改分配给我们对象的一组属性，我们必须记住还要更新<code>__repr__</code>以显示新名称，否则随着时间的推移它会变得不同步。</p>
+<p>最后一点意味着，我们再次通过在代码中引入冗余来为自己做出潜在的额外工作。 因为<code>__repr__</code>中的任何差异都会反映在程序的输出中，所以这种冗余可能比我们之前提到的其他形式更明显; 仍然，避免未来额外的工作通常是一件好事。</p>
+<p><strong>特殊的类属性</strong></p>
+<p>这些问题我们可以用Python的内检工具来解决，这些工具有特殊的属性和函数，可以访问对象实现(objects’ implementations)的内部。这些工具有些高级，通常用于编写其他程序员使用的工具，而不是用作程序员开发应用程序时使用的工具。</p>
+<p>·内置的 <code>instance.__class__</code>属性提供了从instance到创建这个实例的class的链接。类像模块一样有一个<code>__name__</code>，以及一个用于提供超类访问的<code>__bases__</code>队列，我们可以在这里使用它们（而不是我们自己硬编码出来的代码）来打印创建实例的类的名称。</p>
+<p>·内置的<code>object.__dict__</code>属性为附加到名称空间对象的每个属性提供一个包含一个键/值对的字典（包括模块，类和实例）。 因为它是一个字典，所以我们可以获取它的键列表(fetch its key list)，按键索引(index by key)，遍历键(iterate over its keys)等等，来通用地处理所有属性。 我们可以在这里使用它来打印任何实例中的所有属性，而不仅仅是我们在自定义显示中进行硬编码的属性。</p>
+<p>对上面二者的快速回顾（注意：如何在交互式提示符下使用from语句加载Person——类名称存在并从模块中导入，与函数名称和其他变量完全相同）：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> person <span class="keyword">import</span> Person</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bob = Person(<span class="string">'Bob Smith'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bob 						<span class="comment"># Show bob's __repr__ (not __str__)</span></span><br><span class="line">[Person: Bob Smith, <span class="number">0</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(bob) 					 <span class="comment"># Ditto: print =&gt; __str__ or __repr__</span></span><br><span class="line">[Person: Bob Smith, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bob.__class__ 				  <span class="comment"># Show bob's class and its name</span></span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">person</span>.<span class="title">Person</span>'&gt;</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">bob</span>.<span class="title">__class__</span>.<span class="title">__name__</span></span></span><br><span class="line"><span class="class">'<span class="title">Person</span>'</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">list</span><span class="params">(bob.__dict__.keys<span class="params">()</span>)</span> 	  # <span class="title">Attributes</span> <span class="title">are</span> <span class="title">really</span> <span class="title">dict</span> <span class="title">keys</span></span></span><br><span class="line">['pay', 'job', 'name'] 			  # Use list to force list in 3.X</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> key <span class="keyword">in</span> bob.__dict__:</span><br><span class="line">		print(key, <span class="string">'=&gt;'</span>, bob.__dict__[key]) <span class="comment"># Index manually</span></span><br><span class="line">pay =&gt; 0</span><br><span class="line">job =&gt; None</span><br><span class="line">name =&gt; Bob Smith</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> key <span class="keyword">in</span> bob.__dict__:</span><br><span class="line">		print(key, <span class="string">'=&gt;'</span>, getattr(bob, key)) <span class="comment"># == obj.attr  (but attr is a var)</span></span><br><span class="line">pay =&gt; 0</span><br><span class="line">job =&gt; None</span><br><span class="line">name =&gt; Bob Smith</span><br></pre></td></tr></table></figure>
+<p>如果实例的类定义了<code>__slots__</code>，那么可以从实例访问的某些属性可能不会存储在<code>__dict__</code>字典中：比如说，new-style classes的可选且相对模糊的特征（因此包括了Python 3.X中的所有类）在实例中有序地存储了属性;可能完全排除实例<code>__dict__</code>。由于<strong>插槽(slot)</strong>实际上属于类而不是实例，并且由于它们在任何情况下都很少使用，所以我们可以在这里合理地忽略它们，并将注意力集中在正常的<code>__dict__</code>上。</p>
+<p>但是，正如我们所做的那样，请记住，某些程序可能需要为缺少的<code>__dict__</code>捕获异常，或者如果用户可能会部署插槽，则使用<code>hasattr</code>来测试或<code>getattr</code>以及默认值。下一节的代码如果被带有插槽的类使用（如果它缺乏插槽，那么<code>__dict__</code>的存在是可以保证的），它不会fail，但插槽和其他“虚拟”属性不会作为实例数据报告。</p>
+<p><strong>一个通用显示工具</strong></p>
+<p>我们可以将这些接口(interface)用在显示准确类名的超类中，并格式化任何类(any class)的实例的所有属性。下面的例子中，因为<code>__repr__</code>的显示重载使用了通用自检工具，所以它将在任何实例上工作，而不管实例的属性如何设置。</p>
+<p>因为这是一个类，它会自动成为一个通用的格式化工具：由于继承，它可以加入到任何希望使用其显示格式的类中。 还有一个额外的好处，如果我们想要改变实例的显示方式，我们只需要改变这个类，因为继承它的<code>__repr__</code>的每个类在下次运行时都会自动选择新的格式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># File classtools.py (new)</span></span><br><span class="line"><span class="string">"Assorted class utilities and tools"</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AttrDisplay</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Provides an inheritable display overload method that shows</span></span><br><span class="line"><span class="string">    instances with their class names and a name=value pair for</span></span><br><span class="line"><span class="string">    each attribute stored on the instance itself (but not attrs</span></span><br><span class="line"><span class="string">    inherited from its classes). Can be mixed into any class,</span></span><br><span class="line"><span class="string">    and will work on any instance.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">gatherAttrs</span><span class="params">(self)</span>:</span></span><br><span class="line">        attrs = []</span><br><span class="line">        <span class="keyword">for</span> key <span class="keyword">in</span> sorted(self.__dict__):</span><br><span class="line">        	attrs.append(<span class="string">'%s=%s'</span> % (key, getattr(self, key)))</span><br><span class="line">        <span class="keyword">return</span> <span class="string">', '</span>.join(attrs)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">    	<span class="keyword">return</span> <span class="string">'[%s: %s]'</span> % (self.__class__.__name__, self.gatherAttrs())</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">TopTest</span><span class="params">(AttrDisplay)</span>:</span></span><br><span class="line">        count = <span class="number">0</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">            self.attr1 = TopTest.count</span><br><span class="line">            self.attr2 = TopTest.count+<span class="number">1</span></span><br><span class="line">            TopTest.count += <span class="number">2</span></span><br><span class="line"></span><br><span class="line">   	<span class="class"><span class="keyword">class</span> <span class="title">SubTest</span><span class="params">(TopTest)</span>:</span></span><br><span class="line">		<span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    X, Y = TopTest(), SubTest()		<span class="comment"># Make two instances</span></span><br><span class="line">    print(X) 					   <span class="comment"># Show all instance attrs</span></span><br><span class="line">    print(Y)					   <span class="comment"># Show lowest class name</span></span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[TopTest: attr1=<span class="number">0</span>, attr2=<span class="number">1</span>]</span><br><span class="line">[SubTest: attr1=<span class="number">2</span>, attr2=<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<p>把<code>X, Y = TopTest(), SubTest()</code>换成<code>X, Y = SubTest(), TopTest()</code>输出变成了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[SubTest: attr1=<span class="number">0</span>, attr2=<span class="number">1</span>]</span><br><span class="line">[TopTest: attr1=<span class="number">2</span>, attr2=<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<p>(类型自身的属性被改变：每次创建一个新的<code>TopTest</code>类或者其子类实例，<code>TopTest</code>这个类自身的属性都被改变(count += 2)，并且这个改变是保留效果的，这是因为<code>TopTest</code>作为类本身也是一个对象，利用<code>TopTest</code>生成实例对象，其实也是调用了<code>TopTest</code>这个类的对象来生成新的实例的，调用过程中<code>TopTest</code>这个类的属性被改变了，而作为一个既有对象，在作用域内它的属性改变效果是保留的。)</p>
+<p>↑类属性</p>
+<p><strong>实例与类属性的比较(Instance Versus Class Attributes)</strong></p>
+<p>由于类被附加到继承树底部的self对象上，因此类只显示实例属性—— self 的 <code>__dict__</code>属性所包含的东西，而没有实例从类树中较上层的类继承的属性（例如，计算此文件的自检代码——用作实例计数器的类属性）。继承的类属性仅附加到类，不会复制到实例。</p>
+<p>如果您希望也包含继承属性，您可以爬上(climb)实例类的<code>__class__</code>链接，使用<code>__dict__</code>获取类属性，然后遍历(iterate through)该类的<code>__bases__</code>属性以爬到更高的超类，并根据需要重复。如果你喜欢简单代码，在实例上运行一个内置的<code>dir</code>调用(而非<code>__dict__</code>)会产生和climb相同的效果，因为<code>dir</code>结果在排序结果列表中包含了继承名称：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> person <span class="keyword">import</span> Person</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bob = Person(<span class="string">'Bob Smith'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(bob.__dict__.keys()) <span class="comment"># 3.X keys is a view, not a list</span></span><br><span class="line">[<span class="string">'name'</span>, <span class="string">'job'</span>, <span class="string">'pay'</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dir(bob) <span class="comment"># 3.X includes class type methods</span></span><br><span class="line">[<span class="string">'__class__'</span>, <span class="string">'__delattr__'</span>, <span class="string">'__dict__'</span>, <span class="string">'__dir__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__eq__'</span>,</span><br><span class="line"><span class="string">'__format__'</span>, <span class="string">'__ge__'</span>, <span class="string">'__getattribute__'</span>, <span class="string">'__gt__'</span>, <span class="string">'__hash__'</span>, <span class="string">'__init__'</span>,</span><br><span class="line">...more omitted: <span class="number">31</span> attrs...</span><br><span class="line"><span class="string">'__setattr__'</span>, <span class="string">'__sizeof__'</span>, <span class="string">'__str__'</span>, <span class="string">'__subclasshook__'</span>, <span class="string">'__weakref__'</span>,</span><br><span class="line"><span class="string">'giveRaise'</span>, <span class="string">'job'</span>, <span class="string">'lastName'</span>, <span class="string">'name'</span>, <span class="string">'pay'</span>]</span><br></pre></td></tr></table></figure>
+<p>(回顾： 过滤掉带有双下划线的元素：)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>len(dir(bob))</span><br><span class="line"><span class="number">31</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(name <span class="keyword">for</span> name <span class="keyword">in</span> dir(bob) <span class="keyword">if</span> <span class="keyword">not</span> name.startswith(<span class="string">'__'</span>))</span><br><span class="line">[<span class="string">'giveRaise'</span>, <span class="string">'job'</span>, <span class="string">'lastName'</span>, <span class="string">'name'</span>, <span class="string">'pay'</span>]</span><br></pre></td></tr></table></figure>
+<p><strong>工具类中的名称注意事项</strong></p>
+<p>最后一个细节,因为<code>classtools</code>模块中的<code>AttrDisplay</code>类是一个通用工具，可以混合到其他任意类中，所以我们必须意识到与客户端类发生意外名称冲突的可能性。 假设客户端子类可能要同时使用它的<code>__repr__</code>和<code>gatherAttrs</code>，但后者可能不仅仅是子类所期望的 - 如果子类无意中定义了它自己的收集<code>Attrs</code>名称，它可能会中断我们的类，因为在子类中的较低版本将被使用，而不是我们的.</p>
+<p>在文件的自测代码中向<code>TopTest</code>添加<code>gatherAttrs</code>; 除非新方法是相同的，或者有意定制原始方法，否则我们的工具类将不再按计划工作——<code>AttrDisplay</code>中的<code>self.gatherAttrs</code>会从<code>TopTest</code>实例重新搜索：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TopTest</span><span class="params">(AttrDisplay)</span>:</span></span><br><span class="line">    ....</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">gatherAttrs</span><span class="params">(self)</span>:</span> <span class="comment"># Replaces method in AttrDisplay!</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Spam'</span></span><br></pre></td></tr></table></figure>
+<p>这不一定是坏的 - 有时我们希望其他方法可用于子类，无论是直接调用还是用这种方式定制。 但是，如果我们真的只想提供一个<code>__repr__</code>，这并不理想。</p>
+<p>为了尽量减少这种名称冲突的可能性，Python程序员通常在名称外部使用添加一个前缀下划线的方法：<code>_gatherAttrs</code>。这不是万无一失的（如果另一个类也定义了<code>_gatherAttrs</code>），但它通常是足够的，并且它是Python类的内部方法常见的命名约定。</p>
+<p>一个更好的但不常用的解决方案是在方法名前面使用两个下划线：<code>__gatherAttrs</code>给我们。</p>
+<p>Python自动扩展这些名称来包含封闭类的名称，这使得它们在通过继承搜索查找时真正具有唯一性， 这是一个通常称为伪类属性的功能。</p>
+<p><strong>类的最终形式(Our Classes’ Final Form)</strong></p>
+<p>现在，为了在我们的类中使用这个通用工具，我们需要做的就是从它的模块中导入它，并通过在我们的顶级类中继承来mix它，并且摆脱我们之前编码得更具体的<code>__repr__</code>。 新的重载显示方法将由Person和Manager的实例来继承; Manager从Person中获取<code>__repr__</code>，它现在从另一个模块中编码的<code>AttrDisplay</code>中获取它。 以下是应用这些更改的我们的person.py文件的最终版本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># File classtools.py (new)</span></span><br><span class="line">...<span class="keyword">as</span> listed earlier...</span><br><span class="line"></span><br><span class="line"><span class="comment"># File person.py (final)</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Record and process information about people.</span></span><br><span class="line"><span class="string">Run this file directly to test its classes.</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">from</span> classtools <span class="keyword">import</span> AttrDisplay 				<span class="comment"># Use generic display tool</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span><span class="params">(AttrDisplay)</span>:</span> 						<span class="comment"># Mix in a repr at this level</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Create and process person records</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, job=None, pay=<span class="number">0</span>)</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.job = job</span><br><span class="line">        self.pay = pay</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">lastName</span><span class="params">(self)</span>:</span> 						  <span class="comment"># Assumes last is last</span></span><br><span class="line">    	<span class="keyword">return</span> self.name.split()[<span class="number">-1</span>]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">giveRaise</span><span class="params">(self, percent)</span>:</span> 				   <span class="comment"># Percent must be 0..1</span></span><br><span class="line">    	self.pay = int(self.pay * (<span class="number">1</span> + percent))</span><br><span class="line">        </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span><span class="params">(Person)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    A customized Person with special requirements</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, pay)</span>:</span></span><br><span class="line">    	Person.__init__(self, name, <span class="string">'mgr'</span>, pay) 	<span class="comment"># Job name is implied</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">giveRaise</span><span class="params">(self, percent, bonus=<span class="number">.10</span>)</span>:</span></span><br><span class="line">    	Person.giveRaise(self, percent + bonus)</span><br><span class="line">        </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    bob = Person(<span class="string">'Bob Smith'</span>)</span><br><span class="line">    sue = Person(<span class="string">'Sue Jones'</span>, job=<span class="string">'dev'</span>, pay=<span class="number">100000</span>)</span><br><span class="line">    print(bob)</span><br><span class="line">    print(sue)</span><br><span class="line">    print(bob.lastName(), sue.lastName())</span><br><span class="line">    sue.giveRaise(<span class="number">.10</span>)</span><br><span class="line">    print(sue)</span><br><span class="line">    tom = Manager(<span class="string">'Tom Jones'</span>, <span class="number">50000</span>)</span><br><span class="line">    tom.giveRaise(<span class="number">.10</span>)</span><br><span class="line">    print(tom.lastName())</span><br><span class="line">    print(tom)</span><br></pre></td></tr></table></figure>
+<p>由于是最终版，我们添加了一些注释——用于功能性描述的docstrings(“””… …”””)，用于小笔记的#，方法之间的空行——以在类或者方法变得large时增加可读性。</p>
+<p>当我们现在运行这个代码时，我们看到了对象的所有属性，而不仅仅是我们在原始<code>__repr__</code>中硬编码的那些属性。 我们的最终问题得到了解决：因为<code>AttrDisplay</code>直接从自身实例中取出类名，所以每个对象都显示为最接近（最低）的类的名称，现在显示为Manager，而不是Person，最后我们可以验证他的job名称已由Manager构造函数正确填写：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C:\code&gt; person.py</span><br><span class="line">[Person: job=<span class="keyword">None</span>, name=Bob Smith, pay=<span class="number">0</span>]</span><br><span class="line">[Person: job=dev, name=Sue Jones, pay=<span class="number">100000</span>]</span><br><span class="line">Smith Jones</span><br><span class="line">[Person: job=dev, name=Sue Jones, pay=<span class="number">110000</span>]</span><br><span class="line">Jones</span><br><span class="line">[Manager: job=mgr, name=Tom Jones, pay=<span class="number">60000</span>]</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="最终步：在数据库中存储对象-Step-7-Final-Storing-Objects-in-a-Database"><a href="#最终步：在数据库中存储对象-Step-7-Final-Storing-Objects-in-a-Database" class="headerlink" title="最终步：在数据库中存储对象(Step 7 (Final): Storing Objects in a Database)"></a>最终步：在数据库中存储对象(Step 7 (Final): Storing Objects in a Database)</h3><p>现在，我们的工作几乎完成。我们现在有一个双模块系统，它不仅实现了我们的原始设计目标来代表人，还提供了一个通用的属性显示工具，我们可以在将来的其他程序中使用它。通过编写模块文件中的函数和类，我们确保它们自然支持重用。通过将我们的软件编码为类，我们确保它自然支持扩展。<br>尽管我们的类按计划运行，但他们创建的对象并不是真正的数据库记录。也就是说，如果我们关闭Python，我们的实例将会消失——它们是内存中的瞬态对象，不会像文件一样存储在更永久的介质中，所以它们在未来的程序运行中将不可用。事实证明，使实例对象更加永久是件容易的事情，它具有称为对象持久性的Python特性——在创建它们的程序退出后，使对象继续存在。作为本教程的最后一步，让我们使对象成为永久的。</p>
+<p>名词解释：</p>
+<p>储存器pickle : 将任意Python对象序列化为一串字节</p>
+<p>dbm(Database management module) ：实现用于存储字符串的按键存取文件系统</p>
+<p>shelve ：使用其他两个模块通过密钥将Python对象存储在文件上</p>
+<p><strong>存储器模块(The pickle module)</strong></p>
+<p>pickle模块是一种超常的对象格式化和解格式化工具：在内存中给出了一个几乎任意的Python对象，它都能将对象转换为一串字节，之后这串字节可以用来重建内存中的原始对象。 pickle模块几乎可以处理任何你可以创建的对象——list，dictionary以及它们的嵌套组合和类实例。 后者是特别有用的东西，因为它们提供了数据（属性）和行为（方法）; 实际上，这个组合大致相当于“记录”和“程序”。因为pickle是如此普遍，所以它可以将额外的代码替换掉，或者您可能会编写它来创建和解析对象的自定义文本文件表示(custom text file representations)。 通过将一个对象的pickle字符串存储在一个文件中，可以使其永久持久：只需稍后加载并取消它即可重新创建原始对象。</p>
+<p><strong>书架模块(The shelve module)</strong></p>
+<p>尽管使用pickle本身很容易将对象存储在简单的平面文件中，并在稍后将其加载，但shelve模块提供了一个额外的结构层，允许您通过键存储pickle的对象。 shelve使用pickle将对象转换为它的pickled字符串，并将该字符串存储在dbm文件中的键下;当稍后加载时，shelve通过键提取pickled字符串，并用pickle在内存中重新创建原始对象。这完全是一个窍门，但是对于你的脚本来说，一个搁置对象的东西看起来就像dictionary——你可以通过索引来获取索引，分配给键来存储，并使用诸如<code>len</code>，<code>in</code>和<code>dict.keys</code>之类的字典工具来获取信息。书架自动将字典操作映射到存储在文件中的对象。<br>实际上，对于您的脚本，shelve和普通dictionary之间唯一的编码区别在于，您必须首先打开shelve，并且在更改后必须关闭它们。<br>最终结果是，shelve提供了一个简单的数据库，用于通过键存储和获取本地Python对象，从而使它们在程序运行期间保持持久性。它不支持诸如SQL之类的查询工具，并且它缺少在企业级数据库中找到的一些高级功能（例如真正的事务处理），但是存储在shelve上的本地Python对象一旦被键取回，可能会被使用Python语言的全部功能进行处理(be processed with the full power of the Python language)。</p>
+<p><strong>在书架数据库里存储对象(Storing Objects on a Shelve Database)</strong></p>
+<p>现在我们编写一个命名为makedb.py的文件来将类的对象放到shelve里，由于这是一个新文件，因此我们需要导入我们的类以创建一些存储实例。 我们之前使用它来在交互提示中加载一个类，但实际上，与函数和其他变量一样，有两种方法可以从文件加载类（类名与变量类似于any other，并且在这个运行环境中根本不奇怪）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> person 			 <span class="comment"># Load class with import</span></span><br><span class="line">bob = person.Person(...)  <span class="comment"># Go through module name</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> person <span class="keyword">import</span> Person <span class="comment"># Load class with from</span></span><br><span class="line">bob = Person(...) 		  <span class="comment"># Use name directly</span></span><br></pre></td></tr></table></figure>
+<p>使用<code>from</code>来加载脚本能使得输入变少一点。</p>
+<p>一定有了实例，放在shelve上是很容易的，只需导入shelve模块，使用外部文件名打开一个新shelve，将对象分配给shelve中的键，并在完成后关闭shelve。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># File makedb.py: store Person objects on a shelve database</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> person <span class="keyword">import</span> Person, Manager <span class="comment"># Load our classes</span></span><br><span class="line">bob = Person(<span class="string">'Bob Smith'</span>) 		   <span class="comment"># Re-create objects to be stored</span></span><br><span class="line">sue = Person(<span class="string">'Sue Jones'</span>, job=<span class="string">'dev'</span>, pay=<span class="number">100000</span>)</span><br><span class="line">tom = Manager(<span class="string">'Tom Jones'</span>, <span class="number">50000</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> shelve</span><br><span class="line">db = shelve.open(<span class="string">'persondb'</span>)  <span class="comment"># Filename where objects are stored</span></span><br><span class="line"><span class="keyword">for</span> obj <span class="keyword">in</span> (bob, sue, tom):   <span class="comment"># Use object's name attr as key</span></span><br><span class="line">	db[obj.name] = obj 		 <span class="comment"># Store object on shelve by key</span></span><br><span class="line">db.close() 					<span class="comment"># Close after making changes</span></span><br></pre></td></tr></table></figure>
+<p>将名称作为关键字分配给shelve是要为了方便，事实上，密钥可以是任何字符串，包括我们可能使用工具ID和时间戳（可在OS和时间标准库模块中获得）等工具创建的唯一字符串。唯一的规则是键必须是字符串，并且应该是唯一的，因为我们可以为每个键只存储一个对象，尽管该对象可以是列表字典或其他包含许多对象本身的对象。</p>
+<p>事实上，我们存储在键下的值可以是几乎任何类型的Python对象，如字符串，列表和字典的内置类型，以及用户定义的类实例，以及所有这些和更多的嵌套组合。</p>
+<p><strong>以交互方式探索书架(Exploring Shelves Interactively)</strong></p>
+<p>此时，当前目录中有一个或多个真实文件，其名称全部以“persondb”开头。创建的实际文件可能因平台而异，与内置的打开函数一样，除非它包含目录路径，否则shelve.open()中的文件名与当前工作目录相关。这些文件无论存储在哪里，都会实现一个包含我们三个Python对象的pickled表示的键控访问文件。不要删除这些文件 - 它们是您的数据库，并且是备份或移动存储时需要复制或传输的文件。</p>
+<p>我们可以从Windows资源管理器或Python shell中查看shelve文件，但它们是二进制散列文件(binary hash files)，并且它们的大部分内容在shelve模块的运行环境之外没有多大意义。</p>
+<p>使用Python 3.X并没有安装额外的软件，我们的数据库存储在三个文件中（在2.X中，它只是一个文件，persondb，因为bsddb扩展模块预装了Python for shelf;在3.X中，bsddb是一个可选的第三方开源插件）。例如，Python的标准库glob模块允许我们在Python代码中获取目录列表来验证这些文件，并且我们可以用文本或二进制模式打开这些文件来探索字符串和字节：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> glob</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>glob.glob(<span class="string">'person*'</span>)</span><br><span class="line">[<span class="string">'person-composite.py'</span>, <span class="string">'person-department.py'</span>, <span class="string">'person.py'</span>, <span class="string">'person.pyc'</span>,</span><br><span class="line"><span class="string">'persondb.bak'</span>, <span class="string">'persondb.dat'</span>, <span class="string">'persondb.dir'</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(open(<span class="string">'persondb.dir'</span>).read())</span><br><span class="line"><span class="string">'Sue Jones'</span>, (<span class="number">512</span>, <span class="number">92</span>)</span><br><span class="line"><span class="string">'Tom Jones'</span>, (<span class="number">1024</span>, <span class="number">91</span>)</span><br><span class="line"><span class="string">'Bob Smith'</span>, (<span class="number">0</span>, <span class="number">80</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(open(<span class="string">'persondb.dat'</span>,<span class="string">'rb'</span>).read())</span><br><span class="line"><span class="string">b'\x80\x03cperson\nPerson\nq\x00)\x81q\x01&#125;q\x02(X\x03\x00\x00\x00jobq\x03NX\x03\x00</span></span><br><span class="line"><span class="string">...more omitted...</span></span><br></pre></td></tr></table></figure>
+<p>这个内容不是不可能破译，但它在不同的平台上可能有所不同，并且它不是一个易于使用的数据库接口！ 为了更好地验证我们的工作，我们可以编写另一个脚本，或者在交互式提示符下翻找我们的shelve。 因为shelve是包含了Python对象的Python对象，所以我们可以用普通的Python语法和开发模式来处理它们。 在这里，交互式提示有效地成为数据库客户端(database client)：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> shelve</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>db = shelve.open(<span class="string">'persondb'</span>) 	<span class="comment"># Reopen the shelve</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>len(db) <span class="comment"># Three 'records' stored</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(db.keys()) 		<span class="comment"># keys is the index</span></span><br><span class="line">[<span class="string">'Sue Jones'</span>, <span class="string">'Tom Jones'</span>, <span class="string">'Bob Smith'</span>] <span class="comment"># list() to make a list in 3.X</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bob = db[<span class="string">'Bob Smith'</span>] 	<span class="comment"># Fetch bob by key</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bob <span class="comment"># Runs __repr__ from AttrDisplay</span></span><br><span class="line">[Person: job=<span class="keyword">None</span>, name=Bob Smith, pay=<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bob.lastName() 			<span class="comment"># Runs lastName from Person</span></span><br><span class="line"><span class="string">'Smith'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> key <span class="keyword">in</span> db: 			<span class="comment"># Iterate, fetch, print</span></span><br><span class="line">		print(key, <span class="string">'=&gt;'</span>, db[key])</span><br><span class="line"></span><br><span class="line">Sue Jones =&gt; [Person: job=dev, name=Sue Jones, pay=100000]</span><br><span class="line">Tom Jones =&gt; [Manager: job=mgr, name=Tom Jones, pay=50000]</span><br><span class="line">Bob Smith =&gt; [Person: job=None, name=Bob Smith, pay=0]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> key <span class="keyword">in</span> sorted(db):</span><br><span class="line">		print(key, <span class="string">'=&gt;'</span>, db[key]) 		<span class="comment"># Iterate by sorted keys</span></span><br><span class="line"></span><br><span class="line">Bob Smith =&gt; [Person: job=None, name=Bob Smith, pay=0]</span><br><span class="line">Sue Jones =&gt; [Person: job=dev, name=Sue Jones, pay=100000]</span><br><span class="line">Tom Jones =&gt; [Manager: job=mgr, name=Tom Jones, pay=50000]</span><br></pre></td></tr></table></figure>
+<p>请注意，我们无需在此处导入我们的Person或Manager类，以加载或使用我们的存储对象。例如，我们可以自由地调用bob的<code>lastName</code>方法，并自动获得自定义的打印显示格式，即使我们在这里没有他的Person类。这是有效的，因为当Python pickle一个类实例时，它会记录它的自身实例属性，以及它所创建的类的名称和类所在的模块。当bob稍后从shelve中取出并取出时，Python会自动重新导入该类并链接到它。这个方案的结果是，类实例在将来被加载时自动获得他们所有的类行为。我们必须导入我们的类才能创建新的实例，而不是处理现有的实例。虽然这是一个故意的特征，但这个方案的后果有点混杂：</p>
+<p>· 缺点是：当实例稍后加载时，类和它们的模块文件必须是可导入的(importable)。更正式地说，pickleable类必须在sys.path模块搜索路径中列出的目录中可访问的模块文件的顶层编码（并且不应该存在于最顶层的脚本文件的模块<code>__main__</code>中，除非它们在使用时始终处于模块中）。由于这种外部模块文件的要求，有些应用程序会选择更简单的对象，例如字典或列表，特别是要通过Internet传输时。</p>
+<p>· 优点是：类的源代码文件中的更改会在类的实例再次加载时自动更新(picked up);通常不需要自己更新存储对象，因为更新其类的代码会改变它们的行为。</p>
+<p>shelve也有众所周知的局限性（本章最后的数据库建议提到了其中的一些）。对于简单的对象存储，shelve和pickle是非常易于使用的工具。</p>
+<p><strong>更新shelve上的对象</strong></p>
+<p>现在让我们编写一个程序，每次运行它时都会更新一个实例（记录），以证明我们的对象确实是持久的——即每次运行Python程序时它们的当前值都可用。 以下文件updatedb.py打印数据库，并每次都对我们的存储对象进行加注。 如果你追踪这里发生的事情，你会注意到我们获得了很多“免费”的工具——打印对象时会自动使用通用的<code>__repr__</code>重载方法，并且通过调用我们之前编写的giveRaise方法来提薪。 对于基于OOP继承模型的对象，这一切“正常运作”，即使它们在同一个文件中：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># File updatedb.py: update Person object on database</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> shelve</span><br><span class="line">db = shelve.open(<span class="string">'persondb'</span>) <span class="comment"># Reopen shelve with same filename</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> sorted(db):  	 <span class="comment"># Iterate to display database objects</span></span><br><span class="line">	print(key, <span class="string">'\t=&gt;'</span>, db[key]) <span class="comment"># Prints with custom format</span></span><br><span class="line"></span><br><span class="line">sue = db[<span class="string">'Sue Jones'</span>] 		 <span class="comment"># Index by key to fetch</span></span><br><span class="line">sue.giveRaise(<span class="number">.10</span>) 		 	 <span class="comment"># Update in memory using class's method</span></span><br><span class="line">db[<span class="string">'Sue Jones'</span>] = sue 		 <span class="comment"># Assign to key to update in shelve</span></span><br><span class="line">db.close() 					<span class="comment"># Close after making changes</span></span><br></pre></td></tr></table></figure>
+<p>由于此脚本在启动时打印数据库，因此我们必须至少运行两次以查看我们的对象更改：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">C:\code&gt; updatedb.py</span><br><span class="line">Bob Smith =&gt; [Person: job=None, name=Bob Smith, pay=0]</span><br><span class="line">Sue Jones =&gt; [Person: job=dev, name=Sue Jones, pay=100000]	#</span><br><span class="line">Tom Jones =&gt; [Manager: job=mgr, name=Tom Jones, pay=50000]</span><br><span class="line"></span><br><span class="line">C:\code&gt; updatedb.py</span><br><span class="line">Bob Smith =&gt; [Person: job=None, name=Bob Smith, pay=0]</span><br><span class="line">Sue Jones =&gt; [Person: job=dev, name=Sue Jones, pay=110000]	#</span><br><span class="line">Tom Jones =&gt; [Manager: job=mgr, name=Tom Jones, pay=50000]</span><br><span class="line"></span><br><span class="line">C:\code&gt; updatedb.py</span><br><span class="line">Bob Smith =&gt; [Person: job=None, name=Bob Smith, pay=0]</span><br><span class="line">Sue Jones =&gt; [Person: job=dev, name=Sue Jones, pay=121000]	#</span><br><span class="line">Tom Jones =&gt; [Manager: job=mgr, name=Tom Jones, pay=50000]</span><br><span class="line"></span><br><span class="line">C:\code&gt; updatedb.py</span><br><span class="line">Bob Smith =&gt; [Person: job=None, name=Bob Smith, pay=0]</span><br><span class="line">Sue Jones =&gt; [Person: job=dev, name=Sue Jones, pay=133100]	#</span><br><span class="line">Tom Jones =&gt; [Manager: job=mgr, name=Tom Jones, pay=50000]</span><br></pre></td></tr></table></figure>
+<p>在交互式提示符下验证我们的脚本的工作——shelve对于数据库客户端的等价物：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">C:\code&gt; python</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> shelve</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>db = shelve.open(<span class="string">'persondb'</span>) 	<span class="comment"># Reopen database</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>rec = db[<span class="string">'Sue Jones'</span>] 			<span class="comment"># Fetch object by key</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>rec</span><br><span class="line">[Person: job=dev, name=Sue Jones, pay=<span class="number">146410</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>rec.lastName()</span><br><span class="line"><span class="string">'Jones'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>rec.pay</span><br><span class="line"><span class="number">146410</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>本章完毕</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/khunkin.github.io/tags/Learning-Python/" rel="tag"># Learning Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/khunkin.github.io/2018/05/16/Chapter19-Advanced-Function-Topics/" rel="next" title="Chapter19.Advanced Function Topics">
+                <i class="fa fa-chevron-left"></i> Chapter19.Advanced Function Topics
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/khunkin.github.io/2018/05/16/Learning-MySQL/" rel="prev" title="Learning MySQL">
+                Learning MySQL <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/khunkin.github.io/images/avatar.gif"
+                alt="Deng kunquan" />
+            
+              <p class="site-author-name" itemprop="name">Deng kunquan</p>
+              <p class="site-description motion-element" itemprop="description">A personal blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/khunkin.github.io/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/khunkin.github.io/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">標籤</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/khunkin.github.io/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步：制作实例-Making-Instance"><span class="nav-number">1.</span> <span class="nav-text">第一步：制作实例(Making Instance)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#声明类"><span class="nav-number">1.1.</span> <span class="nav-text">声明类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造方法（constructor-method）"><span class="nav-number">1.2.</span> <span class="nav-text">构造方法（constructor method）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一边写一边测试"><span class="nav-number">1.3.</span> <span class="nav-text">一边写一边测试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步：添加行为方法（Adding-Behavior-Methods）"><span class="nav-number">2.</span> <span class="nav-text">第二步：添加行为方法（Adding Behavior Methods）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三步：操作器重载"><span class="nav-number">3.</span> <span class="nav-text">第三步：操作器重载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四步：用子类自定义行为-Customizing-Behavior-by-Subclassing"><span class="nav-number">4.</span> <span class="nav-text">第四步：用子类自定义行为(Customizing Behavior by Subclassing)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五步：自定义构造函数-Customizing-Constructors-Too"><span class="nav-number">5.</span> <span class="nav-text">第五步：自定义构造函数(Customizing Constructors, Too)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第六步：使用自检工具-Using-Introspection-Tools"><span class="nav-number">6.</span> <span class="nav-text">第六步：使用自检工具(Using Introspection Tools)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最终步：在数据库中存储对象-Step-7-Final-Storing-Objects-in-a-Database"><span class="nav-number">7.</span> <span class="nav-text">最终步：在数据库中存储对象(Step 7 (Final): Storing Objects in a Database)</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Deng kunquan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 強力驅動</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主題 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/khunkin.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/khunkin.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/khunkin.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/khunkin.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/khunkin.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/khunkin.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/khunkin.github.io/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/khunkin.github.io/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/khunkin.github.io/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/khunkin.github.io/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/khunkin.github.io/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/khunkin.github.io/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
