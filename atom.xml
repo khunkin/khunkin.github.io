@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>花與夢境</title>
   
-  
+  <subtitle>記錄與隨想</subtitle>
   <link href="/khunkin.github.io/atom.xml" rel="self"/>
   
   <link href="http://KunKin.github.io/"/>
@@ -10,7 +10,7 @@
   <id>http://KunKin.github.io/</id>
   
   <author>
-    <name>Deng Kunquan</name>
+    <name>Khunkin</name>
     
   </author>
   
