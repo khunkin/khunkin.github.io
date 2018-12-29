@@ -361,8 +361,7 @@
 <p>untimed 不限时的</p>
 <hr>
 <a id="more"></a>
-<p>###Abstract</p>
-<p>属性规范模式使非专业人员可以编写可用于自动检查模型的正式规范。现有模式可以推断事件的发生和顺序，但不能说明它们的时间。 我们通过与时间相关的模式来扩展这种模式系统。 这使得我们能够指定实时要求。 </p>
+<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>属性规范模式使非专业人员可以编写可用于自动检查模型的正式规范。现有模式可以推断事件的发生和顺序，但不能说明它们的时间。 我们通过与时间相关的模式来扩展这种模式系统。 这使得我们能够指定实时要求。 </p>
 <hr>
 <h3 id="1、Introduction"><a href="#1、Introduction" class="headerlink" title="1、Introduction"></a>1、Introduction</h3><p>实时需求的形式规范是一个容易出错的任务。开发人员认为它难学，但是依赖于 在时态逻辑公式中给出的规范 的模型检查(model checking)在验证系统正确性上又确实很好用。</p>
 <p>目前属性规范模式已经成功应用于弥补从业者与模型检查工具之间的距离。只是现有的模式系统没有考虑到关于时间的信息。</p>
@@ -652,7 +651,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Introduction"><span class="nav-number">1.</span> <span class="nav-text">1、Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Untimed-Specification-Patterns-不限时的规范模式"><span class="nav-number">2.</span> <span class="nav-text">2、Untimed Specification Patterns(不限时的规范模式)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、Timed-Observer-Automata（限时观察者自动机）"><span class="nav-number">3.</span> <span class="nav-text">3、Timed Observer Automata（限时观察者自动机）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、Pattern-Catalogue：Pattern（模式目录：模式）"><span class="nav-number">4.</span> <span class="nav-text">4、Pattern Catalogue：Pattern（模式目录：模式）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、Pattern-Catalogue-Event（模式目录：事件）"><span class="nav-number">5.</span> <span class="nav-text">5、Pattern Catalogue: Event（模式目录：事件）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pattern-Catalogue-Scopes（模式目录：范围）"><span class="nav-number">6.</span> <span class="nav-text">Pattern Catalogue: Scopes（模式目录：范围）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Introduction"><span class="nav-number">2.</span> <span class="nav-text">1、Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Untimed-Specification-Patterns-不限时的规范模式"><span class="nav-number">3.</span> <span class="nav-text">2、Untimed Specification Patterns(不限时的规范模式)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、Timed-Observer-Automata（限时观察者自动机）"><span class="nav-number">4.</span> <span class="nav-text">3、Timed Observer Automata（限时观察者自动机）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、Pattern-Catalogue：Pattern（模式目录：模式）"><span class="nav-number">5.</span> <span class="nav-text">4、Pattern Catalogue：Pattern（模式目录：模式）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、Pattern-Catalogue-Event（模式目录：事件）"><span class="nav-number">6.</span> <span class="nav-text">5、Pattern Catalogue: Event（模式目录：事件）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pattern-Catalogue-Scopes（模式目录：范围）"><span class="nav-number">7.</span> <span class="nav-text">Pattern Catalogue: Scopes（模式目录：范围）</span></a></li></ol></div>
             
 
           </div>
@@ -878,7 +877,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

@@ -462,14 +462,14 @@
 </li>
 <li><p><strong>the Time-Constrained Response pattern</strong>：</p>
 <ul>
-<li>​can also produce simpler properties by setting bounds to extreme values，while a single-sided constraint model would require to use two different properties in order to limit the occurrence of the response in a given time window ($i.e.$ $“S$ $responds$ $to$ $P$ $after$ $at$ $most$ $k<em>{max}$ $time$ $units”,$ and $“if$ $P$ $holds$ $that$ $not$ $S$ $holds$ $for$ $at$ $least$ $k</em>{min}$ $time$ $units”)$.</li>
+<li>​can also produce simpler properties by setting bounds to extreme values，while a single-sided constraint model would require to use two different properties in order to limit the occurrence of the response in a given time window ($i.e.$ $“S$ $responds$ $to$ $P$ $after$ $at$ $most$ $k_{max}$ $time$ $units”,$ and $“if$ $P$ $holds$ $that$ $not$ $S$ $holds$ $for$ $at$ $least$ $k_{min}$ $time$ $units”)$.</li>
 </ul>
 </li>
 </ul>
 <p>$behavioural$ $generalisation：$</p>
 <ul>
-<li>Response pattern can be regarded as a specific case of the Time-Constrained Response（$“S$ $responds$ $to$ $P$ $between$ $k<em>{min}$ $and$ $k</em>{max}”$ ,<em>k</em>$<em>{min}=0$ and <em>k</em>$</em>{max}=\infin$ ）</li>
-<li>Precedence pattern ~~ Time-Constrained Precedence （<em>k</em>$<em>{min}=0$ and <em>k</em>$</em>{max}=-\infin$ , because the time window is located in the past）</li>
+<li>Response pattern can be regarded as a specific case of the Time-Constrained Response（$“S$ $responds$ $to$ $P$ $between$ $k_{min}$ $and$ $k_{max}”$ ,<em>k</em>$_{min}=0$ and <em>k</em>$_{max}=\infin$ ）</li>
+<li>Precedence pattern ~~ Time-Constrained Precedence （<em>k</em>$_{min}=0$ and <em>k</em>$_{max}=-\infin$ , because the time window is located in the past）</li>
 <li>Existence pattern ~~ Bounded Existence pattern：$P?i \equiv P?^{\infin}_{1}i$ （occurrence count is not limited：accepted occurrences of P $\geq$ 1）</li>
 </ul>
 <p>上面的方法把the proposed unified organization of patterns 和 Dwyer et al、Konrad and Cheng的patterns 关联了起来。</p>
@@ -487,6 +487,7 @@
 <p>$rule$：imposes the expression to be verified on the entire time domain.</p>
 <p>$\rightarrow$ patterns are typically presented in the form of $start$ or of $rule$</p>
 <h4 id="5-1-Occurrence-specification-patterns"><a href="#5-1-Occurrence-specification-patterns" class="headerlink" title="5.1 Occurrence specification patterns"></a>5.1 Occurrence specification patterns</h4><p>the scopes modelled through intervals $independently$：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -517,7 +518,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>$example$ $1$：<strong>Absence</strong> pattern Temporal Logic Mappings：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -548,7 +551,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>$example$ $2$：all the occurrence patterns for the “After Q until R” scope：（formulas share the same structure）</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -579,6 +584,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>注：<strong><em>true</em></strong>?$[+$<strong><em>Q</em></strong>$,+$<strong><em>R</em></strong>$)$    $\Leftrightarrow$    with respect to the evaluation time instant, a non-empty interval [+Q,+R] will occur in the future (Q and R are predicates).    （注：根据其 Boolean值也可用于判断某个interval是否存在）</p>
 <p><strong>疑：</strong>TILCO-X operators model the occurrence patterns in a quite simple way, while leaving to the intervals the definition of the pattern scope and thus keeping separate the two concepts into the specification. “two concepts”指什么？scope和interval 还是 pattern和interval？</p>
 <p>when the specified time interval is empty， “@” operator is $vacuously$ $true$, while “? ” operator is evaluated as $false$</p>
@@ -620,7 +626,8 @@
 <li><p>TILCO-X：<strong><em>start</em></strong> : $($<strong><em>P</em></strong> $→$<strong><em>S</em></strong>?$[$<strong>0</strong>$,+∞))$@$[+$<strong><em>Q</em></strong>$,+∞)$</p>
 </li>
 </ul>
-<h5 id="5-3-3-Consideration-on-Order-Specification-Patterns"><a href="#5-3-3-Consideration-on-Order-Specification-Patterns" class="headerlink" title="5.3.3 Consideration on Order Specification Patterns"></a>5.3.3 Consideration on Order Specification Patterns</h5><table>
+<h5 id="5-3-3-Consideration-on-Order-Specification-Patterns"><a href="#5-3-3-Consideration-on-Order-Specification-Patterns" class="headerlink" title="5.3.3 Consideration on Order Specification Patterns"></a>5.3.3 Consideration on Order Specification Patterns</h5><div class="table-container">
+<table>
 <thead>
 <tr>
 <th style="text-align:center">Scope</th>
@@ -639,7 +646,7 @@
 <tr>
 <td style="text-align:center">Parameter predicates</td>
 <td style="text-align:center"><em>scope _ beg</em></td>
-<td style="text-align:center"><em>scope <em> beg </em> in</em></td>
+<td style="text-align:center"><em>scope _ beg _ in</em></td>
 <td style="text-align:center"><em>scope _ end</em></td>
 </tr>
 <tr>
@@ -680,12 +687,13 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>The general expression of “$S$ $precedes$ $P$” for the first three scopes（$Globally$，$Before$ $R$，$After$ $Q$） can be written in terms of parameter predicates (defined as reported in the above table) as</p>
-<p>​        <strong><em>start</em></strong> : $($<strong><em>P</em></strong> $→$<strong><em>S</em></strong> ?$[$<strong><em>scope <em> beg </em> in</em></strong>$,$<strong>0</strong>$))$@$[$<strong><em>scope _ beg</em></strong>$,$ <strong><em>scope _ end</em></strong> $)$</p>
+<p>​        <strong><em>start</em></strong> : $($<strong><em>P</em></strong> $→$<strong><em>S</em></strong> ?$[$<strong><em>scope _ beg _ in</em></strong>$,$<strong>0</strong>$))$@$[$<strong><em>scope _ beg</em></strong>$,$ <strong><em>scope _ end</em></strong> $)$</p>
 <p>“$S$ $precedes$ $P$” in “$After$ $Q$ $until$ $R$” scope：</p>
-<p>​        <strong><em>rule</em></strong> : $($<strong><em>P</em></strong> $→$<strong><em>S</em></strong> ?$[$<strong><em>scope <em> beg </em> in</em></strong>$,$<strong>0</strong>$))$@$[$<strong><em>scope _ beg</em></strong>$,$ <strong><em>scope _ end</em></strong> $)$</p>
+<p>​        <strong><em>rule</em></strong> : $($<strong><em>P</em></strong> $→$<strong><em>S</em></strong> ?$[$<strong><em>scope _ beg _ in</em></strong>$,$<strong>0</strong>$))$@$[$<strong><em>scope _ beg</em></strong>$,$ <strong><em>scope _ end</em></strong> $)$</p>
 <p>the expression of “$Between$ $Q$ $and$ $R$” only adds the scope existence (i.e. R must happen)：</p>
-<p>​        <strong><em>rule</em></strong> : $\exist$ <strong><em>scope _ end</em></strong> $\rightarrow$ $($<strong><em>P</em></strong> $→$<strong><em>S</em></strong> ?$[$<strong><em>scope <em> beg </em> in</em></strong>$,$<strong>0</strong>$))$@$[$<strong><em>scope _ beg</em></strong>$,$ <strong><em>scope _ end</em></strong> $)$</p>
+<p>​        <strong><em>rule</em></strong> : $\exist$ <strong><em>scope _ end</em></strong> $\rightarrow$ $($<strong><em>P</em></strong> $→$<strong><em>S</em></strong> ?$[$<strong><em>scope _ beg _ in</em></strong>$,$<strong>0</strong>$))$@$[$<strong><em>scope _ beg</em></strong>$,$ <strong><em>scope _ end</em></strong> $)$</p>
 <p>To let in a clear form the interval “Q-R”      has been considered of great value for the reader.<br>Two versions of TILCO-X mapping for “$S$ $responds$ $to$ $P$” in $After$ $Q$ $until$ $R$ scope are reported :</p>
 <ul>
 <li>rule :  $($<strong><em>P</em></strong> $→$<strong><em>S</em></strong>?$[$<strong>0</strong>$,+$<strong><em>R</em></strong>$))$@$[+$<strong><em>Q</em></strong>$,+$<strong><em>R</em></strong>$)$</li>
@@ -1122,7 +1130,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

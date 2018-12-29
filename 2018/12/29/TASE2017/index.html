@@ -393,8 +393,7 @@
 <p>Sect. VI： presents the specification and verification on an example of real-time property; </p>
 <p>Sect. VII：gives some concluding remarks.</p>
 <hr>
-<p>###II. TECHNICAL BACKGROUND</p>
-<p><strong>PN（Petri Net）：</strong></p>
+<h3 id="II-TECHNICAL-BACKGROUND"><a href="#II-TECHNICAL-BACKGROUND" class="headerlink" title="II. TECHNICAL BACKGROUND"></a>II. TECHNICAL BACKGROUND</h3><p><strong>PN（Petri Net）：</strong></p>
 <ul>
 <li>each transition is associated with a local clock that starts once it is enabled; then the transition can fire when the clock value is in the time interval associated with the transition.  $\rightarrow$ 只有在时间区间内transition才能fire</li>
 </ul>
@@ -457,7 +456,7 @@
 <p>most basic $mmc$ formulae： $<a href="P_{tester}=1">T</a>$ or $\langle T \rangle (P_{tester}=0)$</p>
 <p>注： $[a]\phi$ == after $a$ necessarily $\phi$ ，其中 $a$ is an action, while $\phi$ is a formula</p>
 <p>注：$\langle a \rangle \phi$ == after $a$ possibly $\phi$  == $\lnot[a]\lnot \phi$</p>
-<p>$<a href="P_{tester}=1">T</a>$ or $\langle T \rangle (P<em>{tester}=0)$ means that for all (respectively for at least one) successor state, the observer is (respectively is not) in state $P</em>{tester}$</p>
+<p>$<a href="P_{tester}=1">T</a>$ or $\langle T \rangle (P_{tester}=0)$ means that for all (respectively for at least one) successor state, the observer is (respectively is not) in state $P_{tester}$</p>
 <p>All the necessary formulas are checked on-the-fly using the <strong>muse</strong> model checker.</p>
 <p>The abstractions that only preserve state reachability is more effective than the state space abstraction that preserve the set of traces of a language</p>
 <h4 id="B-Soundness-of-Observer"><a href="#B-Soundness-of-Observer" class="headerlink" title="$B.$ $Soundness$ $of$ $Observer$"></a>$B.$ $Soundness$ $of$ $Observer$</h4><p>what Soundness means：</p>
@@ -485,17 +484,17 @@
 <ul>
 <li>$E^{i}$: $the$ $i^{th}$ $occurrence$ $of$ $event$ $E$<ul>
 <li>When $E$ occurred $i$ times, the place $P_{occ}$ has $i$ tokens, and the transition $E^{i}$ is enabled，这确保了 $E^{i}$ 是与the $i^{th}$ occurrence of $E^{i}$ 同时发生的。</li>
-<li>The place $P<em>{once}$ with one token controls the occurrence times of $E^{i}$. 确保$E^{i}$只occur一次，通过用 其他finite value替换$P</em>{once}$里的token数量可以enable $E^{i}$ several times. （<strong>疑：</strong>这里不是很理解，为什么第i次能被重复enable？我觉得就算是enable了的话，之后再occur也不是第$i$次了啊？）</li>
+<li>The place $P_{once}$ with one token controls the occurrence times of $E^{i}$. 确保$E^{i}$只occur一次，通过用 其他finite value替换$P_{once}$里的token数量可以enable $E^{i}$ several times. （<strong>疑：</strong>这里不是很理解，为什么第i次能被重复enable？我觉得就算是enable了的话，之后再occur也不是第$i$次了啊？）</li>
 <li>注：$E^{i}$ 的$[0,0]$ 代表 $E^{i}$ should fire immediately (with a delay included in the interval [0, 0]).</li>
 </ul>
 </li>
 <li>$E^{-k}$： $k^{th}$ $delay$ $of$ $E$               <ul>
-<li>$P<em>{occ}$ stores tokens representing the occurring times of event $E$. Each time $P</em>{occ}$ has $k$ tokens.</li>
+<li>$P_{occ}$ stores tokens representing the occurring times of event $E$. Each time $P_{occ}$ has $k$ tokens.</li>
 <li>the read arc enables the transition $E^{–k}$, which consumes one token in $P_{occ}$</li>
 </ul>
 </li>
 <li>$E^{/k}:$ $k$ $times$ $slower$ $sub$-$occurrence$ $of$ $E$<ul>
-<li>When $E$ occurs $k$ times, the place $P<em>{occ}$ accumulates $k$ tokens $\rightarrow$ the transition $E^{/k}$ is fired $+$ all the $k$ tokens in $P</em>{occ}$ are consumed.(简单来说就是：token积累到k就fire+释放, 依此循环)</li>
+<li>When $E$ occurs $k$ times, the place $P_{occ}$ accumulates $k$ tokens $\rightarrow$ the transition $E^{/k}$ is fired $+$ all the $k$ tokens in $P_{occ}$ are consumed.(简单来说就是：token积累到k就fire+释放, 依此循环)</li>
 </ul>
 </li>
 <li>$I+t:$ $time$ $t$ $elapsed$ $since$ $system$ $initialization$                       （$I$ 指代initialize the system，可以看成Event？）<ul>
@@ -510,8 +509,8 @@
 </li>
 <li>$S^{S}$ &amp; $S^{E}:$ $entering$ $and$ $exiting$ $events$ $of$ $a$ $State$ $S$<ul>
 <li>the transitions $S^{S}/S^{E}$ represent the entering $/$ exiting events of the state $S$.</li>
-<li>When a system enters the state $S$ $\rightarrow$ (the assertion $S$ in ${P<em>{RE}}(S)$ is true $\rightarrow$ enable the transition $S</em>{S}$) $\rightarrow$ transit the token in the place $P<em>{S}$ to the place $P</em>{E}$.  (注意与from…to…的区别)</li>
-<li>when the system exits state $S$ $\rightarrow$ the assertion $\lnot S$ in $P<em>{RE}(\lnot S)$ is true $\rightarrow$ transit the token in the place $P</em>{E}$ to the place $P_{S}$.</li>
+<li>When a system enters the state $S$ $\rightarrow$ (the assertion $S$ in ${P_{RE}}(S)$ is true $\rightarrow$ enable the transition $S_{S}$) $\rightarrow$ transit the token in the place $P_{S}$ to the place $P_{E}$.  (注意与from…to…的区别)</li>
+<li>when the system exits state $S$ $\rightarrow$ the assertion $\lnot S$ in $P_{RE}(\lnot S)$ is true $\rightarrow$ transit the token in the place $P_{E}$ to the place $P_{S}$.</li>
 </ul>
 </li>
 </ul>
@@ -524,42 +523,42 @@
 <ul>
 <li><p>$O(E^{i})​$ $=​$ $true​$ ：$for​$ $the​$ $occurrence​$ $of​$ $event​$ $E^{i}​$</p>
 <ul>
-<li>The <u>place</u> $P<em>{occ}$ is used to observe the occurrence times of <u>event</u> $E</em>{M}$</li>
-<li>Once the <u>transition</u> $E<em>{M}$ has fired $i$ times, the token in $P</em>{occ}$ is observed, which is assessed using the </li>
+<li>The <u>place</u> $P_{occ}$ is used to observe the occurrence times of <u>event</u> $E_{M}$</li>
+<li>Once the <u>transition</u> $E_{M}$ has fired $i$ times, the token in $P_{occ}$ is observed, which is assessed using the </li>
 <li><strong>$mmc$ <u>assertion</u></strong> :$P_{occ}$ $\ge$ $i$</li>
-<li>TINA takes $P<em>{occ}$ as the number of tokens in the place $P</em>{occ}$</li>
+<li>TINA takes $P_{occ}$ as the number of tokens in the place $P_{occ}$</li>
 <li>(<strong>疑：</strong>在这里好像transition == event？表达一致，行为后果也一致)</li>
 </ul>
 </li>
 <li><p>$isFinite(E)$ $=$ $True$：$for$ $the$ $bounded$ $occurrence$ $of$ $E$</p>
 <ul>
 <li>used to assess whether the occurrence of an event is finite.</li>
-<li>$P<em>{occ}$ accumulates the occurrence times of event $E</em>{M}$</li>
-<li>The <u>transition</u> $T<em>{Overflow}$ is not fired $==$ no overflow is detected $==$ $E</em>{M}$ does not exceed the <u>occurring bound</u> $Occ_{max}$</li>
+<li>$P_{occ}$ accumulates the occurrence times of event $E_{M}$</li>
+<li>The <u>transition</u> $T_{Overflow}$ is not fired $==$ no overflow is detected $==$ $E_{M}$ does not exceed the <u>occurring bound</u> $Occ_{max}$</li>
 <li><strong>$mmc$ assertion</strong>: $\lnot T_{Overflow}$</li>
 </ul>
 </li>
-<li>$Freq(E<em>{A})$ $\sdot$ $N</em>{A}$ $=$ $Freq(E<em>{B})$ $\sdot$ $N</em>{B}$ ：$for$ $equivalent$ $occurrence$ $of$ $E<em>{A}$ $and$ $E</em>{B}$:        （frequency <em> number == frequency </em> number，两个frequency 存在最小公倍数）（<strong>疑：</strong>不是很懂这个equivalent occurrence，是不是跟$E^{i}$之于$E$一样是同一个Event但是在不同时间发生？…直译过来的“等效发生”有点理解不能）<ul>
+<li>$Freq(E_{A})$ $\sdot$ $N_{A}$ $=$ $Freq(E_{B})$ $\sdot$ $N_{B}$ ：$for$ $equivalent$ $occurrence$ $of$ $E_{A}$ $and$ $E_{B}$:        （frequency <em> number == frequency </em> number，两个frequency 存在最小公倍数）（<strong>疑：</strong>不是很懂这个equivalent occurrence，是不是跟$E^{i}$之于$E$一样是同一个Event但是在不同时间发生？…直译过来的“等效发生”有点理解不能）<ul>
 <li>used to identify equivalent occurrences between two <u>periodic events</u> with different (or equal) frequencies</li>
-<li>$N<em>{A}$ and $N</em>{B}$ is minimal coefficients（$N<em>{A},N</em>{B}\in \mathbb{Z}^{+}$）</li>
-<li>$N<em>{A}$ and $N</em>{B}$ can be computed using the <u>Least Common Multiple</u> (<strong>lcm</strong>, 最小公倍数) and the <u>Greatest Common Divisor</u> (<strong>gcd</strong>, 最大公因数)<ul>
-<li>$N<em>{A}= \frac{lcm(F</em>{A},F<em>{B})}{gcd(lcm(F</em>{A},F<em>{B}), F</em>{A})}$</li>
-<li>$N<em>{B}= \frac{lcm(F</em>{A},F<em>{B})}{gcd(lcm(F</em>{A},F<em>{B}), F</em>{B})}$</li>
+<li>$N_{A}$ and $N_{B}$ is minimal coefficients（$N_{A},N_{B}\in \mathbb{Z}^{+}$）</li>
+<li>$N_{A}$ and $N_{B}$ can be computed using the <u>Least Common Multiple</u> (<strong>lcm</strong>, 最小公倍数) and the <u>Greatest Common Divisor</u> (<strong>gcd</strong>, 最大公因数)<ul>
+<li>$N_{A}= \frac{lcm(F_{A},F_{B})}{gcd(lcm(F_{A},F_{B}), F_{A})}$</li>
+<li>$N_{B}= \frac{lcm(F_{A},F_{B})}{gcd(lcm(F_{A},F_{B}), F_{B})}$</li>
 </ul>
 </li>
-<li>$N<em>{A}$ and $N</em>{B}$ should be introduced to identify the corresponding occurrence between $E<em>{A}$ and $E</em>{B}$</li>
-<li><u>places</u> $Tester<em>{A}/Tester</em>{B}$ counts the occurring times of events $E<em>{A}/E</em>{B}$.</li>
+<li>$N_{A}$ and $N_{B}$ should be introduced to identify the corresponding occurrence between $E_{A}$ and $E_{B}$</li>
+<li><u>places</u> $Tester_{A}/Tester_{B}$ counts the occurring times of events $E_{A}/E_{B}$.</li>
 </ul>
 </li>
-<li>$T(E<em>{A}, E</em>{B})$ $&gt;$ $t$ ：$for$ $minimal$ $Time$ $Interval$ $between$ $Events$<ul>
-<li>$E<em>{A}$ and $E</em>{B}$ can be periodic or aperiodic.</li>
-<li>== $\mathrm{T}$($E<em>{A}$) $-$ $\mathrm{T}$($E</em>{B}$) $&gt;$ $t$</li>
-<li>$mmc$ <strong>assertion</strong>：$\lnot(OverflowA\or OverflowB)\and \lnot((Tester<em>{B} = N</em>{B}) \and (Tester<em>{A} &lt; N</em>{A}) )$   (When $E<em>{A}$ and $E</em>{B}$ are aperiodic, $N<em>{A}$ = $N</em>{B}$ = 1)</li>
+<li>$T(E_{A}, E_{B})$ $&gt;$ $t$ ：$for$ $minimal$ $Time$ $Interval$ $between$ $Events$<ul>
+<li>$E_{A}$ and $E_{B}$ can be periodic or aperiodic.</li>
+<li>== $\mathrm{T}$($E_{A}$) $-$ $\mathrm{T}$($E_{B}$) $&gt;$ $t$</li>
+<li>$mmc$ <strong>assertion</strong>：$\lnot(OverflowA\or OverflowB)\and \lnot((Tester_{B} = N_{B}) \and (Tester_{A} &lt; N_{A}) )$   (When $E_{A}$ and $E_{B}$ are aperiodic, $N_{A}$ = $N_{B}$ = 1)</li>
 </ul>
 </li>
-<li>$T(E<em>{A}, E</em>{B})$ $&lt;$ $t$： $for$ $maximum$ $Time$ $Interval$ $between$ $Events$<ul>
-<li>== $\mathrm{T}$($E<em>{A}$) $-$ $\mathrm{T}$($E</em>{B}$) $&lt;$ $t$</li>
-<li>$mmc$ assertion: $Overflow<em>{A} \lnot Overflow</em>{B}$    (<strong>疑：</strong>为什么不是$\lnot(OverflowA\or OverflowB)$？)</li>
+<li>$T(E_{A}, E_{B})$ $&lt;$ $t$： $for$ $maximum$ $Time$ $Interval$ $between$ $Events$<ul>
+<li>== $\mathrm{T}$($E_{A}$) $-$ $\mathrm{T}$($E_{B}$) $&lt;$ $t$</li>
+<li>$mmc$ assertion: $Overflow_{A} \lnot Overflow_{B}$    (<strong>疑：</strong>为什么不是$\lnot(OverflowA\or OverflowB)$？)</li>
 </ul>
 </li>
 <li>$D(S) \ge t$ $\And$ $ D(S) \le t$ ：  $for$ $minimal/maximal$ $time$ $duration$ $of$ $a$ $state$ $S$<ul>
@@ -591,16 +590,16 @@
 </li>
 </ul>
 </li>
-<li>$\mathit{Between}$ $E<em>{A}$ $\mathit{and}$ $E</em>{B}$ <ul>
-<li>means between the equivalent occurrences of $E<em>{A}$ and $E</em>{B}$</li>
-<li>IF both $E<em>{A}$ and $E</em>{B}$ are periodic events, their occurrence frequencies must be equal</li>
-<li>IF $E<em>{A}$ and $E</em>{B}$ occur only once, 则默认 $F<em>{A}$ = $F</em>{B}$</li>
-<li>$mmc$ assertion:  $(Tester<em>{A}=1)\and (Tester</em>{B}=0)$</li>
+<li>$\mathit{Between}$ $E_{A}$ $\mathit{and}$ $E_{B}$ <ul>
+<li>means between the equivalent occurrences of $E_{A}$ and $E_{B}$</li>
+<li>IF both $E_{A}$ and $E_{B}$ are periodic events, their occurrence frequencies must be equal</li>
+<li>IF $E_{A}$ and $E_{B}$ occur only once, 则默认 $F_{A}$ = $F_{B}$</li>
+<li>$mmc$ assertion:  $(Tester_{A}=1)\and (Tester_{B}=0)$</li>
 </ul>
 </li>
-<li>$\mathit{After}$ $E<em>{A}$ $\mathit{until}$ $E</em>{B}$<ul>
-<li>$E<em>{B}$ occurs after $E</em>{A}$：  == $\mathit{Exist}$ $E<em>{B}$ $\mathit{After}$ $E</em>{A}$  ==   $\mathit{Between}$ $E<em>{A}$ $\mathit{and}$ $E</em>{B}$</li>
-<li>$E<em>{B}$ does not occur after $E</em>{A}$：  == $\mathit{Absent}$ $E<em>{B}$ $\mathit{After}$ $E</em>{A}$  ==  $\mathit{After}$ $E_{A}$ </li>
+<li>$\mathit{After}$ $E_{A}$ $\mathit{until}$ $E_{B}$<ul>
+<li>$E_{B}$ occurs after $E_{A}$：  == $\mathit{Exist}$ $E_{B}$ $\mathit{After}$ $E_{A}$  ==   $\mathit{Between}$ $E_{A}$ $\mathit{and}$ $E_{B}$</li>
+<li>$E_{B}$ does not occur after $E_{A}$：  == $\mathit{Absent}$ $E_{B}$ $\mathit{After}$ $E_{A}$  ==  $\mathit{After}$ $E_{A}$ </li>
 </ul>
 </li>
 </ul>
@@ -610,7 +609,7 @@
 <ul>
 <li><p>$Exist$ $P$ $in$ $S$     == $P$ must occur within $S$</p>
 <ul>
-<li>$\begin{cases} {N(P\and S)\ge 1\ \ \ \ \ \ \mathrm{if}\ \mathrm{N(S)}&gt;0}\ {True\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \mathrm{if}\ \mathrm{N(S)}=0} \end{cases}$</li>
+<li>$\begin{cases} {N(P\and S)\ge 1\ \ \ \ \ \ \mathrm{if}\ \mathrm{N(S)}&gt;0}\\ {True\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  \mathrm{if}\ \mathrm{N(S)}=0} \end{cases}$</li>
 </ul>
 </li>
 <li><p>$Absent$ $P$ $in$ $S$   == $P$ must not occur in $S$</p>
@@ -811,7 +810,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#I-Introduction"><span class="nav-number">1.</span> <span class="nav-text">I. Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#III-CATALOG-OF-REAL-TIME-PROPERTY-PATTERNS"><span class="nav-number">2.</span> <span class="nav-text">III. CATALOG OF REAL-TIME PROPERTY PATTERNS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IV-DESIGN-PRINCIPLES-OF-TPN-TTS-OBSERVERS"><span class="nav-number">3.</span> <span class="nav-text">IV. DESIGN PRINCIPLES OF TPN/TTS OBSERVERS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-Structure-of-Observer"><span class="nav-number">3.1.</span> <span class="nav-text">$A.$ $Structure$ $of$ $Observer$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-Soundness-of-Observer"><span class="nav-number">3.2.</span> <span class="nav-text">$B.$ $Soundness$ $of$ $Observer$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-Efficiency-of-Observer"><span class="nav-number">3.3.</span> <span class="nav-text">$C.$ $Efficiency$ $of$ $Observer$</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#V-ELEMENTARY-OBSERVERS-FOR-THE-VERIFICATION-OF-PROPERTY-PATTERNS"><span class="nav-number">4.</span> <span class="nav-text">V. ELEMENTARY OBSERVERS FOR THE VERIFICATION OF PROPERTY PATTERNS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-Basic-Event-Modifiers"><span class="nav-number">4.1.</span> <span class="nav-text">$A.$ $Basic$ $Event$ $Modifiers$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-Basic-Predicates"><span class="nav-number">4.2.</span> <span class="nav-text">$B. Basic$ $Predicates$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-Basic-Scope-Modifiers"><span class="nav-number">4.3.</span> <span class="nav-text">$C. Basic$ $Scope$ $Modifiers$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#D-Occurrence-Modifiers"><span class="nav-number">4.4.</span> <span class="nav-text">$D.$ $Occurrence$ $Modifiers$</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#I-Introduction"><span class="nav-number">1.</span> <span class="nav-text">I. Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#II-TECHNICAL-BACKGROUND"><span class="nav-number">2.</span> <span class="nav-text">II. TECHNICAL BACKGROUND</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#III-CATALOG-OF-REAL-TIME-PROPERTY-PATTERNS"><span class="nav-number">3.</span> <span class="nav-text">III. CATALOG OF REAL-TIME PROPERTY PATTERNS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IV-DESIGN-PRINCIPLES-OF-TPN-TTS-OBSERVERS"><span class="nav-number">4.</span> <span class="nav-text">IV. DESIGN PRINCIPLES OF TPN/TTS OBSERVERS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-Structure-of-Observer"><span class="nav-number">4.1.</span> <span class="nav-text">$A.$ $Structure$ $of$ $Observer$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-Soundness-of-Observer"><span class="nav-number">4.2.</span> <span class="nav-text">$B.$ $Soundness$ $of$ $Observer$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-Efficiency-of-Observer"><span class="nav-number">4.3.</span> <span class="nav-text">$C.$ $Efficiency$ $of$ $Observer$</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#V-ELEMENTARY-OBSERVERS-FOR-THE-VERIFICATION-OF-PROPERTY-PATTERNS"><span class="nav-number">5.</span> <span class="nav-text">V. ELEMENTARY OBSERVERS FOR THE VERIFICATION OF PROPERTY PATTERNS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-Basic-Event-Modifiers"><span class="nav-number">5.1.</span> <span class="nav-text">$A.$ $Basic$ $Event$ $Modifiers$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-Basic-Predicates"><span class="nav-number">5.2.</span> <span class="nav-text">$B. Basic$ $Predicates$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-Basic-Scope-Modifiers"><span class="nav-number">5.3.</span> <span class="nav-text">$C. Basic$ $Scope$ $Modifiers$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#D-Occurrence-Modifiers"><span class="nav-number">5.4.</span> <span class="nav-text">$D.$ $Occurrence$ $Modifiers$</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1037,7 +1036,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

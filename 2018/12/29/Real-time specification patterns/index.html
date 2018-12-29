@@ -432,6 +432,7 @@
 <li><strong>real-time order：</strong> captures properties that place time bounds on the order of two occurrences.</li>
 </ul>
 <p><strong>real-time</strong> specification patterns</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -468,6 +469,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h4 id="3-2-Structured-English"><a href="#3-2-Structured-English" class="headerlink" title="3.2 Structured English"></a>3.2 Structured English</h4><p>作者提出的 structured English grammar 支持定性的(qualitative)  也支持实时的 规范模式。</p>
 <p>注：property的意思是scope后面接个$ 逗号, $，再接specification，最后放个$句号.$。 事实上其他的语句也是一样，有点像字符串拼接 xxx+ str + xxx</p>
 <p>注：语法的结构需要结合下面的rules</p>
@@ -984,7 +986,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 
