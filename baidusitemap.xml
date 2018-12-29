@@ -4,6 +4,146 @@
 
     
   <url>
+    <loc>http://KunKin.github.io/khunkin.github.io/2018/12/29/Real-time%20specification%20patterns/</loc>
+    <lastmod>2018-12-29T07:29:00.667Z</lastmod>
+    <data>
+        <display>
+        <title>Real-time specification patterns</title>
+        <pubTime>2018-12-29T03:47:39.000Z</pubTime>
+        
+        <tag>pattern</tag>
+         
+         
+           
+             
+              <breadCrumb title="pattern" url="http://KunKin.github.io/khunkin.github.io/categories/pattern/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://KunKin.github.io/khunkin.github.io/2018/12/29/non-ZenoAndAcceptingLocation/</loc>
+    <lastmod>2018-12-29T07:21:41.018Z</lastmod>
+    <data>
+        <display>
+        <title>non-Zeno And Accepting Location</title>
+        <pubTime>2018-12-29T03:47:38.000Z</pubTime>
+        
+        <tag>pattern</tag>
+         
+         
+           
+             
+              <breadCrumb title="pattern" url="http://KunKin.github.io/khunkin.github.io/categories/pattern/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://KunKin.github.io/khunkin.github.io/2018/05/16/Permutation/</loc>
+    <lastmod>2018-12-29T07:21:20.967Z</lastmod>
+    <data>
+        <display>
+        <title>Permutation</title>
+        <pubTime>2018-05-16T03:36:29.000Z</pubTime>
+        
+        <tag>C</tag>
+         
+         
+           
+             
+              <breadCrumb title="Learning C" url="http://KunKin.github.io/khunkin.github.io/categories/Learning-C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://KunKin.github.io/khunkin.github.io/2018/12/29/TASE2017/</loc>
+    <lastmod>2018-12-29T07:19:20.551Z</lastmod>
+    <data>
+        <display>
+        <title>TASE2017</title>
+        <pubTime>2018-12-29T03:47:40.000Z</pubTime>
+        
+        <tag>pattern</tag>
+         
+         
+           
+             
+              <breadCrumb title="pattern" url="http://KunKin.github.io/khunkin.github.io/categories/pattern/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://KunKin.github.io/khunkin.github.io/2018/12/29/Patterns%20in%20property%20specifications%20for%20finite-state%20verification/</loc>
+    <lastmod>2018-12-29T07:19:08.143Z</lastmod>
+    <data>
+        <display>
+        <title>Patterns in property specifications for finite-state verification</title>
+        <pubTime>2018-12-29T03:47:35.000Z</pubTime>
+        
+        <tag>pattern</tag>
+         
+         
+           
+             
+              <breadCrumb title="pattern" url="http://KunKin.github.io/khunkin.github.io/categories/pattern/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://KunKin.github.io/khunkin.github.io/2018/12/29/Patterns%20for%20Timed%20Property%20Specifications/</loc>
+    <lastmod>2018-12-29T07:18:54.561Z</lastmod>
+    <data>
+        <display>
+        <title>Patterns for Timed Property Specifications</title>
+        <pubTime>2018-12-29T03:47:36.000Z</pubTime>
+        
+        <tag>pattern</tag>
+         
+         
+           
+             
+              <breadCrumb title="pattern" url="http://KunKin.github.io/khunkin.github.io/categories/pattern/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://KunKin.github.io/khunkin.github.io/2018/12/29/Expressing%20and%20organizing%20real-time%20specification%20patterns%20via%20temporal%20logics/</loc>
+    <lastmod>2018-12-29T07:18:43.955Z</lastmod>
+    <data>
+        <display>
+        <title>Expressing and organizing real-time specification patterns via temporal logics</title>
+        <pubTime>2018-12-29T03:47:42.000Z</pubTime>
+        
+        <tag>pattern</tag>
+         
+         
+           
+             
+              <breadCrumb title="pattern" url="http://KunKin.github.io/khunkin.github.io/categories/pattern/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://KunKin.github.io/khunkin.github.io/2018/05/16/Chapter14-Iterations-and-Comprehensions/</loc>
     <lastmod>2018-05-16T13:19:39.639Z</lastmod>
     <data>
@@ -57,26 +197,6 @@
            
              
               <breadCrumb title="Learning Python" url="http://KunKin.github.io/khunkin.github.io/categories/Learning-Python/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://KunKin.github.io/khunkin.github.io/2018/05/16/Permutation/</loc>
-    <lastmod>2018-05-16T07:53:19.319Z</lastmod>
-    <data>
-        <display>
-        <title>Permutation</title>
-        <pubTime>2018-05-16T03:36:29.000Z</pubTime>
-        
-        <tag>C</tag>
-         
-         
-           
-             
-              <breadCrumb title="Learning C" url="http://KunKin.github.io/khunkin.github.io/categories/Learning-C/"/>
           
         </display>
     </data>

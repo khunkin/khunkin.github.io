@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/khunkin.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/khunkin.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/khunkin.github.io/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/khunkin.github.io/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/khunkin.github.io/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/khunkin.github.io/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/khunkin.github.io/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="pattern," />
+
+
+
+
+
+  <link rel="alternate" href="/khunkin.github.io/atom.xml" title="花與夢境" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="摘要： ​    1、基于对 一些工业上的嵌入式系统应用的基于时间的需求， 用三种常用的时序逻辑创造了实时规范模式。 ​    2、为了进一步加强对于一个规范的理解，给出了支持实时属性的结构化英语语法。">
+<meta name="keywords" content="pattern">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Real-time specification patterns">
+<meta property="og:url" content="http://KunKin.github.io/2018/12/29/Real-time specification patterns/index.html">
+<meta property="og:site_name" content="花與夢境">
+<meta property="og:description" content="摘要： ​    1、基于对 一些工业上的嵌入式系统应用的基于时间的需求， 用三种常用的时序逻辑创造了实时规范模式。 ​    2、为了进一步加强对于一个规范的理解，给出了支持实时属性的结构化英语语法。">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:updated_time" content="2018-12-29T07:29:00.667Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Real-time specification patterns">
+<meta name="twitter:description" content="摘要： ​    1、基于对 一些工业上的嵌入式系统应用的基于时间的需求， 用三种常用的时序逻辑创造了实时规范模式。 ​    2、为了进一步加强对于一个规范的理解，给出了支持实时属性的结构化英语语法。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/khunkin.github.io/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://KunKin.github.io/2018/12/29/Real-time specification patterns/"/>
+
+
+
+
+
+  <title>Real-time specification patterns | 花與夢境</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/khunkin.github.io/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">花與夢境</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">記錄與隨想</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/khunkin.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/khunkin.github.io/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/khunkin.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/khunkin.github.io/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/khunkin.github.io/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            關於
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://KunKin.github.io/khunkin.github.io/2018/12/29/Real-time specification patterns/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Khunkin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/khunkin.github.io/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="花與夢境">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Real-time specification patterns</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2018-12-29T11:47:39+08:00">
+                2018-12-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/khunkin.github.io/categories/pattern/" itemprop="url" rel="index">
+                    <span itemprop="name">pattern</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>摘要：</p>
+<p>​    1、基于对 一些工业上的嵌入式系统应用的基于时间的需求， 用三种常用的时序逻辑创造了实时规范模式。</p>
+<p>​    2、为了进一步加强对于一个规范的理解，给出了支持实时属性的结构化英语语法。</p>
+<a id="more"></a>
+<hr>
+<p>翻译约定：</p>
+<p>temporal  时序的</p>
+<hr>
+<h3 id="1、Introduction"><a href="#1、Introduction" class="headerlink" title="1、Introduction"></a>1、Introduction</h3><p>常用的正式的规范语言， 如linear-time temporal logic (LTL)，computational tree logic (CTL), graphical interval logic (GIL)，都不能用于规范实时属性，因为他们不支持对时间的定量推理（quantitative reasoning）。</p>
+<p>本文搜集了一些 可以用于规范嵌入式系统的实时属性 的实时性规范模式，这些模式保留了Dwyer的模式风格，但是是与Dwyer的模式互补的。作者提供了到上面三种常用语言的映射。</p>
+<p>别人的工作 ，第一是没有完整的模式系统，二是属性通常仅根据一个实时时间逻辑来规定。对于第二个问题，本文确定了一个common的属性集，这个属性集在三种逻辑中都能够表达。最后，别人的工作也没有提供对 类似于Dwyer用于规范模式的 scope的支持。</p>
+<p>本文给出了一个双管齐下的方法去解决对 规范实时系统的正式属性 的感知困难(the perceived difficulty with specifying formal properties of real-time systems)：实时时间逻辑规范的模版(templates for real-time temporal logic specifications)，以及对属性的自然语言规范。</p>
+<p>本文的实时规范模式包括了 用三种常用的实时时间逻辑规范实时属性 的模版，这三种实时时间逻辑包括：metric temporal logic(MTL), timed computational tree logic(TCTL), real-time graphical interval logic(RTGIL)。</p>
+<p>之所以选择这三种逻辑是因为：</p>
+<p>​    1、便于使用了Dwyer的规范模式的人，这三种逻辑都是与LTL、CTL、GIL直接相关的</p>
+<p>​    2、这三种逻辑都有 有着不同优缺点的工具 的支持，包括模型检查以及定理证明能力——能选择手头上最合适的系统模型</p>
+<p>​    3、MTL 和 TCTL 覆盖了线性时间 和 分支时间，而RTGIL是一个线性时间的时间逻辑——提供了一个易读的对属性的图形化表达。</p>
+<p>此外，本文提出的结构化英文语法可以用来创建一个 关于被一个模式包含的一个规范 的自然语言表述。</p>
+<p>本论文其余部分内容：</p>
+<p>Section 2：回顾模式中使用的规范模式和三种时态逻辑</p>
+<p>Section 3：描述实时指定模式模板和迄今为止未发现的模式。还根据它们所处理的属性类型提供模式的分类</p>
+<p>Section 4：描述论文的方法在电子控制助力转向系统中的应用</p>
+<p>Section 5：相关工作</p>
+<p>Section 6：总结</p>
+<hr>
+<h3 id="2、Background"><a href="#2、Background" class="headerlink" title="2、Background"></a>2、Background</h3><p>在本节中，我们将概述Dwyer等人的规范模式。并简要描述用于我们的模式的实时时间逻辑——MTL、TCTL和RTGIL。实时时间逻辑使用允许定量时间推理的时间运算符来扩展标准时间逻辑。在离散(discrete)时间领域（例如<strong>N</strong>）上解释的实时时间逻辑被称为离散实时时间逻辑(discrete real-time temporal logics)（例如，MTL），而在稠密(dense)时间领域（例如<strong>R</strong>）上解释的实时时间逻辑被称为稠密实时时间逻辑(dense real-time temporal logics)（例如，TCTL和RTGIL）。</p>
+<p>本文使用不带 旧式时间运算符的 时间逻辑，主要是因为很少有分析工具支持老式的时间运算符了。</p>
+<p>分析工具大致可以分成两类：</p>
+<ul>
+<li><p><strong>异构分析工具(Heterogeneous Analysis Tools)</strong>：用多种规范语言对系统建模，并针对系统检查属性。</p>
+</li>
+<li><p><strong>同构分析工具(Homogeneous Analysis Tools)</strong>：使用相同的语言来建模系统和属性。</p>
+</li>
+</ul>
+<h4 id="2-1-Specification-Patterns"><a href="#2-1-Specification-Patterns" class="headerlink" title="2.1 Specification Patterns"></a>2.1 Specification Patterns</h4><p>Dwyer等人描述了适用于以不同形式编写的规范的软件属性的几种模式，例如LTL，CTL，GIL和量化正则表达式（QRE）。</p>
+<p>specification pattern又分为两种：</p>
+<ul>
+<li><p>occurrence pattern</p>
+</li>
+<li><p>order pattern</p>
+</li>
+</ul>
+<p>虽然给定的规范模式可能有适用范围，但是原始规范模式(original specification pattern)不包含定时信息(timing information)。</p>
+<h4 id="2-2-MTL"><a href="#2-2-MTL" class="headerlink" title="2.2 MTL"></a>2.2 MTL</h4><p>MTL (Metric Temporal Logic, 标准时序逻辑) 是LTL（Linear-time temporal logic, 线性时间时序逻辑）的拓展，LTL被翻译成一个离散的时间线。</p>
+<p>MTL假设了一个数字时钟（或者假想时钟，fictitious-clock），这个外部的离散的时钟以一个固定的速度运行(progress)。这个时钟与系统中其他元件是异步的，但是其他元件能随着时钟的每一次滴答同步地提高自己离散的时间变量。可以得知时钟的两次跳动之间的状态顺序，但不能得知其确切的发生时间。MTL包含了 always(□),  eventually(◇), next(○), strong until(U), weak until(W) 等运算符的时间约束版本。</p>
+<p>作为样例的异构分析工具包括了作者最近修订的UML形式化框架，这个框架使用一个 UML类的 Promela 表述和带有时间信息的状态图 ，去建模一个系统，并且使用MTL去规范正确属性(correctness properties)。</p>
+<p>此外，Temporal Rover 支持将 MTL公式生成的代码 包含在程序代码中，以监视运行过程中 MTL规范的满足性。   </p>
+<h4 id="2-3-TCTL"><a href="#2-3-TCTL" class="headerlink" title="2.3 TCTL"></a>2.3 TCTL</h4><p>TCTL (Timed Computational Tree Logic, 定时计算逻辑) 是CTL (Computational Tree Logic) 的拓展。TCTL被解释成一个连续的时间线，包含always(G),  eventually(F), strong until(U), weak until(W) 等运算符， 这些运算符都是被existentially(E) 或者 universally(A) 所量化的。</p>
+<p>存在 支持TCTL(包括 UPPAAL, HyTech, Kronos等)的 异构分析工具。时间自动机被用于建模一个系统，而TCTL被用于规范属性的正确性。Kronos 完全支持TCTL，但UPPAAL和HyTech只在时序公式的开头支持量化，之后则专注于可达性分析(reachability analysis)。</p>
+<h4 id="2-4-RTGIL"><a href="#2-4-RTGIL" class="headerlink" title="2.4 RTGIL"></a>2.4 RTGIL</h4><p>RTGIL(Real-time graphical interval logic, 实时图形区间逻辑)，以及它相应的文字表示RTFIL(Real-time future interval logic, 实时将来区间逻辑)，都是对GIL(graphical interval logic) 和 GIL的文字表示 FIL(future interval logic)，</p>
+<p>RTGIL是一个连续时间(dense time)上解释的命题线性时间时序逻辑(propositional linear-time temporal logic)。</p>
+<p>在RTGIL中，时间线用来显示计算的进展(progression)。间隔(interval) 可以在这个时间线上构造，间隔由两个状态分隔的时间线段表示（左闭右开）。</p>
+<p>Intervals are constructed using search patterns with associated target formulae.</p>
+<p>A search locates the first state in the future from the current position on the time line where the target formula holds (which might be the current state if the formula holds there).</p>
+<p>Initial properties as well as henceforth or eventuality properties can be assigned to an  interval.</p>
+<p>RTGIL 只支持一个实时运算符——谓词<strong>len</strong>( len(d, D] ) ，指代间隔的持续时间（$\gt d  \bigwedge \le D$, D可以是$ \infin $）</p>
+<p>RTGIL 由 RTGIL环境支持， RTGIL environment 包括：graphical editor, automated theorem prover, data base, proof manager component.</p>
+<h4 id="2-5-Discussion"><a href="#2-5-Discussion" class="headerlink" title="2.5 Discussion"></a>2.5 Discussion</h4><p>RTGIL 和 MTL/TCTL的区别：</p>
+<p>​    RTGIL constructs an interval by denoting the states that serve as endpoints to the interval and then places a bound on the duration of this interval.</p>
+<p>​    MTL/TCTL construct an interval with a time-bounded operator and denote the states that can occur in this interval.</p>
+<p>​    简单来说就是：RTGIL——将state表示为端点， MUL/TCTL——表示state所发生的区间</p>
+<p>所以，RTGIL 与 其他linear-time real-time temporal logic 互相是无法表达的。但是，RTGIL是少数decidable的dense real-time temporal logics之一。</p>
+<p>a property expressed in one real-time temporal logic cannot be considered truly equivalent to the same property expressed in a different temporal logic.</p>
+<hr>
+<h3 id="3、Real-time-Patterns"><a href="#3、Real-time-Patterns" class="headerlink" title="3、Real-time Patterns"></a>3、Real-time Patterns</h3><p>Our pattern system is intended to provide strategies for <em>how to specify real-time properties in a formal specification language</em>, where the properties are amenable to automated analysis. </p>
+<p>Due to the selected temporal logics, certain properties are not expressible, for example：</p>
+<ul>
+<li>properties that only apply to one path of execution (MTL and RTGIL formulas are always universally quantified)</li>
+<li>certain properties with strict timing constraints (due to the limited expressiveness of the <strong>len</strong> predicate in RTGIL)</li>
+</ul>
+<p>Selecting a different set of temporal logics leads to a different set of specification patterns.</p>
+<h4 id="3-1-Pattern-Repository-and-Classification"><a href="#3-1-Pattern-Repository-and-Classification" class="headerlink" title="3.1 Pattern Repository and Classification"></a>3.1 Pattern Repository and Classification</h4><p>three <strong>broad categories</strong> of real-time properties：</p>
+<ul>
+<li><strong>duration：</strong>captures properties that can be used to place bounds on the duration of an occurrence.</li>
+<li><strong>periodic：</strong> describes properties that address periodic occurrences.</li>
+<li><strong>real-time order：</strong> captures properties that place time bounds on the order of two occurrences.</li>
+</ul>
+<p><strong>real-time</strong> specification patterns</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Pattern Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Duration</strong></td>
+<td><strong>Minimum Duration</strong></td>
+<td>Describes the minimum amount of time a state formula has to hold once it becomes true.</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Maximum Duration</strong></td>
+<td>Captures that a state formula always holds for less than a specified amount of time.</td>
+</tr>
+<tr>
+<td><strong>Periodic</strong></td>
+<td><strong>Bounded Recurrence</strong></td>
+<td>Denotes the amount of time in which a state formula has to hold at least once.</td>
+</tr>
+<tr>
+<td><strong>Real-time Order</strong></td>
+<td><strong>Bounded Response</strong></td>
+<td>Restricts the maximum amount of time that passes after a state formula holds until another state</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Bounded Invariance</strong></td>
+<td>Specifies the minimum amount of time a state formula must hold once another state formula is</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-2-Structured-English"><a href="#3-2-Structured-English" class="headerlink" title="3.2 Structured English"></a>3.2 Structured English</h4><p>作者提出的 structured English grammar 支持定性的(qualitative)  也支持实时的 规范模式。</p>
+<p>注：property的意思是scope后面接个$ 逗号, $，再接specification，最后放个$句号.$。 事实上其他的语句也是一样，有点像字符串拼接 xxx+ str + xxx</p>
+<p>注：语法的结构需要结合下面的rules</p>
+<h5 id="structured-English-Grammar’s-structure"><a href="#structured-English-Grammar’s-structure" class="headerlink" title="structured English Grammar’s structure"></a><strong>structured English Grammar’s structure</strong></h5><p>​    <strong>Start</strong>：</p>
+<p>​        1、property：                    scope $,$ specification $.$</p>
+<p>​    <strong>Scope：</strong></p>
+<p>​        2、scope：                        $Globally$ | $Before$ <strong>R</strong> | $After$ <strong>Q</strong> | $Between$ <strong>Q</strong> $and$ <strong>R</strong>| $After$ <strong>Q</strong> $until$ <strong>R</strong></p>
+<p>​    <strong>General：</strong></p>
+<p>​        3、specification：                $qualitative Type$| $realtime Type$</p>
+<p>​    <strong>Qualitative：</strong></p>
+<p>​        4、qualitativeType：                $occurrenceCategory$ | $orderCategory$</p>
+<p>​        5、occurrenceCategory：            $absencePattern$ | $universalityPattern$ | $existencePattern$ | $boundedExistencePattern$</p>
+<p>​        6、absencePattern：                it is never the case that <strong>P</strong> holds</p>
+<p>​        7、universalityPattern：            it is always the case that <strong>P</strong> holds</p>
+<p>​        8、existencePattern：             <strong>P</strong> eventually holds</p>
+<p>​        9、boundedExistencePattern：    transitions to states in which P holds occur at most twice</p>
+<p>​        10、orderCategory：                 it is always the case that if  <strong>P</strong> holds  ($precedencePattern$ | $precedenceChainPattern1$-$2$ | $precedenceChainPattern2$-$1$ | $responsePattern$ | $responseChainPattern1$-$2$ |$responseChainPattern2$-$1$ | $constrainedChainPattern1$-$2$)</p>
+<p>​        11、precedencePattern：            , then  <strong>S</strong> previously held</p>
+<p>​        12、precedenceChainPattern1-2：     and is succeeded by  <strong>S</strong> , then  <strong>T</strong>  previously held</p>
+<p>​        13、precedenceChainPattern2-1：    , then  <strong>S</strong>  previously held and was preceded by  <strong>T</strong></p>
+<p>​        14、responsePattern：            , then  <strong>S</strong>  eventually holds</p>
+<p>​        15、responseChainPattern1-2：    , then  <strong>S</strong>  eventually holds and is succeeded by  <strong>T</strong></p>
+<p>​        16、responseChainPattern2-1：     and is succeeded by  <strong>S</strong> , then  <strong>T</strong>  eventually holds after  <strong>S</strong></p>
+<p>​        17、constrainedChainPattern1-2：    , then  <strong>S</strong>  eventually holds and is succeeded by  <strong>T</strong> , where  <strong>Z</strong>  does not hold between  <strong>S</strong>  and  <strong>T</strong></p>
+<p>​    <strong>Realtime：</strong></p>
+<p>​        18、realtimeType：                it is always the case that  $(durationCategory$ | $periodicCategory$ | $realtimeOrderCategory)$</p>
+<p>​        19、durationCategory：            once  <strong>P</strong>  becomes satisfied, it holds for  $(minDurationPattern$ | $maxDurationPattern)$</p>
+<p>​        20、minDurationPattern：        at least  <strong>c</strong>  time unit(s)</p>
+<p>​        21、maxDurationPattern：        less than  <strong>c</strong>  time unit(s)</p>
+<p>​        22、periodicCategory：            <strong>P</strong>  holds  $boundedRecurrencePattern$</p>
+<p>​        23、boundedRecurrencePattern：    at least every  <strong>c</strong>  time unit(s)</p>
+<p>​        24、realtimeOrderCategory：        if  <strong>P</strong>  holds, then  <strong>S</strong>  holds  $(boundedResponsePattern$ | $boundedInvariancePattern)$</p>
+<p>​        25、boundedResponsePattern：    after at most  <strong>c</strong>  time unit(s)</p>
+<p>​        26、boundedInvariancePattern：    for at least  <strong>c</strong>  time unit(s)</p>
+<h5 id="rules："><a href="#rules：" class="headerlink" title="rules："></a>rules：</h5><ul>
+<li><p>literal terminals are delimited by quotation marks <code> </code> </p>
+</li>
+<li><p>non-literal terminals are given in a <strong>san serif</strong> font</p>
+</li>
+<li><p>non-terminals are given in <em>italics</em></p>
+</li>
+<li><p><strong>property</strong> is the start symbol</p>
+</li>
+<li><p>the language L(G) is finite （since the grammar is non-circular and has no repetition）</p>
+</li>
+<li><p>Each sentence (or string) s with s $\in$ L(G) serves as a handle that accompanies a scoped formula of a qualitative or real-time specification pattern.</p>
+</li>
+</ul>
+<p>注：literal terminal 指的是用引号括起来的输出结果，如<code>Globally, it is always the case that if P holds, then S holds after at most c time unit(s).</code></p>
+<p>注：non-literal terminal 指 用the grammar 初步导出的literal terminal ：<code>Globally, it is always the case that if P holds, then S holds after at most c time unit(s).</code>中的<strong>P</strong>、<strong>c</strong>和<strong>S</strong>等未被实例化的”形参”，<strong>P</strong>和<strong>S</strong> 是 Boolean propositional formulae，它们都是需要被实例化的(need to be instantiated)</p>
+<p>注：instantiate 实例化是指用具体的Boolean propositional formula对形参进行代换。如replacing P with (x = 0)。</p>
+<h5 id="supported-specifications："><a href="#supported-specifications：" class="headerlink" title="supported specifications："></a>supported specifications：</h5><ul>
+<li><p>TLT，CTL，CIL —— Dwyer’s specification patterns</p>
+</li>
+<li><p>MTL，TCTL，RTGIL —— our real-time specification patterns</p>
+</li>
+</ul>
+<h5 id="The-process-to-create-a-natural-language-representation："><a href="#The-process-to-create-a-natural-language-representation：" class="headerlink" title="The process to create a natural language representation："></a>The process to create a natural language representation：</h5><ul>
+<li><p>Initially, choose the scope of the specified property($globally / before / after / between / after$-$until$), followed by the type($qualitative / real$-$time$)</p>
+</li>
+<li><p>Then, select the category of the specified property($duration$, $periodic$, or $real$-$time$ $order$ for real-time properties, and $occurrence$ or $order$ for qualitative properties)</p>
+</li>
+<li><p>Finally, construct structed English sentence by choosing the corresponding specification pattern.</p>
+<p>​    ——“precede” denote strict past</p>
+<p>​    ——“succeed” denote strict  future</p>
+<p>​    ——“held previously” denote non-strict past</p>
+<p>​    ——“hold eventually” denote non-strict future</p>
+</li>
+</ul>
+<h4 id="3-3-Pattern-Template"><a href="#3-3-Pattern-Template" class="headerlink" title="3.3 Pattern Template"></a>3.3 Pattern Template</h4><p>Our real-time specification pattern template contains the following <strong>fields</strong>：</p>
+<ul>
+<li><p><strong>Pattern Name ：</strong>serves as a handle for the pattern’s use and describes the nature of the pattern. </p>
+</li>
+<li><p><strong>Classification：</strong>denotes if the pattern belongs to the duration, periodic, or real-time order category</p>
+</li>
+<li><p><strong>Structured English Specification：</strong>The structured English sentence captures the property. The sentence is given in its unscoped version; a scope will be added as a prex to the sentence when the pattern is instantiated.</p>
+</li>
+<li><p><strong>Pattern Intent：</strong>A short description of properties for which the pattern is applicable.</p>
+</li>
+<li><p><strong>Real-time Temporal Logic Mappings：</strong>Contains mappings of the pattern to MTL, TCTL, and RTGIL for each of the 5 possible scopes.</p>
+</li>
+<li><p><strong>Examples and Known Uses：</strong>Gives example instantiations of the pattern and describes common situations where the pattern is useful in real-world scenarios.</p>
+</li>
+<li><p><strong>Relationships：</strong>Describes relations to other qualitative as well as real-time specification patterns. Additionally, this field contains information about other commonly used properties and techniques that are related to this pattern.</p>
+</li>
+</ul>
+<p>[Figure 4] 是一个例子——$Bounded$ $Recurrence$ $Real$-$time$ $Specification$ $Pattern$</p>
+<hr>
+<h3 id="4-Case-Study"><a href="#4-Case-Study" class="headerlink" title="4. Case Study"></a>4. Case Study</h3><p>以 electronically controlled steering (ECS) system 为例，使用 object analysis patterns创建一个UML模型（UML：Unified Modeling Language ，统一建模语言）</p>
+<p>Object analysis patterns contain structural and behavioral information to guide the creation of UML models of the system.</p>
+<p>本例涉及到了时间粒度(time granularity)的概念，有fine-grained(细粒度)和coarse-grained(粗粒度)两种</p>
+<p>We construct two distinct (UML) system models with different timing granularities (fine-grained and coarse-grained), thus offering different views of the system. (Modeling all timed behaviors at one level of timing granularity would require large clock values and make it difficult to understand the analysis results.)</p>
+<p>以其中一个requirement为例：</p>
+<p>​    <strong>Requirement 1(c): Operational checks must be done every 10 milliseconds.</strong></p>
+<p>​    1、This requirement describes a periodic occurrence，and it denotes …(字面意思)</p>
+<p>​    2、assume that an operational check happening more often than every 10 milliseconds is considered correct system behavior.</p>
+<p>​    3、Hence，use the $Bounded$ $Recurrence$ $Pattern$</p>
+<p>​    4、Because one time unit corresponds to 0.5 milliseconds in the fine-grained<br>model, 10 milliseconds are captured as 20 time units.(MTL 的$Eventually​$ 亦即是$\lozenge​$，下标单位为time units。在这个例子中，1 time unit == 0.5ms，所以10ms == 20 time units，故在MTL formula中用20 time units 表达10ms)</p>
+<p>​    5、用MTL formula 表达出来： $\square (\lozenge _{\leq20}$$ (in(OperationalCheck)))$</p>
+<p>​    6、生成structured English grammar：</p>
+<p>​            <strong>“Globally, it is always the case that</strong> (in(OperationalCheck)) <strong>holds at least every 20 time unit(s).”</strong> (Grammar: 1, 2, 3, 18, 22, 23)</p>
+<p>概括一下步骤：</p>
+<p>​    analyze the scope&amp;category of the specified property，根据结果choose the corresponding specification patterns，对每一个pattern分别用temporal logic formula 表达成formula，再用3.2中的grammar表达这个formula（具体过程在3.2）</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/khunkin.github.io/tags/pattern/" rel="tag"># pattern</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/khunkin.github.io/2018/12/29/non-ZenoAndAcceptingLocation/" rel="next" title="non-Zeno And Accepting Location">
+                <i class="fa fa-chevron-left"></i> non-Zeno And Accepting Location
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/khunkin.github.io/2018/12/29/TASE2017/" rel="prev" title="TASE2017">
+                TASE2017 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/khunkin.github.io/images/avatar.gif"
+                alt="Khunkin" />
+            
+              <p class="site-author-name" itemprop="name">Khunkin</p>
+              <p class="site-description motion-element" itemprop="description">A personal blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/khunkin.github.io/archives/">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/khunkin.github.io/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分類</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/khunkin.github.io/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">標籤</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/khunkin.github.io/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Introduction"><span class="nav-number">1.</span> <span class="nav-text">1、Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Background"><span class="nav-number">2.</span> <span class="nav-text">2、Background</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-Specification-Patterns"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Specification Patterns</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-MTL"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 MTL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-TCTL"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 TCTL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-RTGIL"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 RTGIL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-Discussion"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 Discussion</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、Real-time-Patterns"><span class="nav-number">3.</span> <span class="nav-text">3、Real-time Patterns</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-Pattern-Repository-and-Classification"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 Pattern Repository and Classification</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-Structured-English"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 Structured English</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#structured-English-Grammar’s-structure"><span class="nav-number">3.2.1.</span> <span class="nav-text">structured English Grammar’s structure</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rules："><span class="nav-number">3.2.2.</span> <span class="nav-text">rules：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#supported-specifications："><span class="nav-number">3.2.3.</span> <span class="nav-text">supported specifications：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#The-process-to-create-a-natural-language-representation："><span class="nav-number">3.2.4.</span> <span class="nav-text">The process to create a natural language representation：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-Pattern-Template"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 Pattern Template</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Case-Study"><span class="nav-number">4.</span> <span class="nav-text">4. Case Study</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Khunkin</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 強力驅動</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主題 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/khunkin.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/khunkin.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/khunkin.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/khunkin.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/khunkin.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/khunkin.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/khunkin.github.io/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/khunkin.github.io/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/khunkin.github.io/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/khunkin.github.io/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/khunkin.github.io/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/khunkin.github.io/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/khunkin.github.io/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
