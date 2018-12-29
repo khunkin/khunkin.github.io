@@ -4,6 +4,46 @@
 
     
   <url>
+    <loc>http://KunKin.github.io/khunkin.github.io/2018/12/29/TASE2017/</loc>
+    <lastmod>2018-12-29T07:41:41.512Z</lastmod>
+    <data>
+        <display>
+        <title>TASE2017</title>
+        <pubTime>2018-12-29T03:47:40.000Z</pubTime>
+        
+        <tag>pattern</tag>
+         
+         
+           
+             
+              <breadCrumb title="pattern" url="http://KunKin.github.io/khunkin.github.io/categories/pattern/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://KunKin.github.io/khunkin.github.io/2018/12/29/Expressing%20and%20organizing%20real-time%20specification%20patterns%20via%20temporal%20logics/</loc>
+    <lastmod>2018-12-29T07:33:42.714Z</lastmod>
+    <data>
+        <display>
+        <title>Expressing and organizing real-time specification patterns via temporal logics</title>
+        <pubTime>2018-12-29T03:47:42.000Z</pubTime>
+        
+        <tag>pattern</tag>
+         
+         
+           
+             
+              <breadCrumb title="pattern" url="http://KunKin.github.io/khunkin.github.io/categories/pattern/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://KunKin.github.io/khunkin.github.io/2018/12/29/Real-time%20specification%20patterns/</loc>
     <lastmod>2018-12-29T07:29:00.667Z</lastmod>
     <data>
@@ -64,26 +104,6 @@
 
     
   <url>
-    <loc>http://KunKin.github.io/khunkin.github.io/2018/12/29/TASE2017/</loc>
-    <lastmod>2018-12-29T07:19:20.551Z</lastmod>
-    <data>
-        <display>
-        <title>TASE2017</title>
-        <pubTime>2018-12-29T03:47:40.000Z</pubTime>
-        
-        <tag>pattern</tag>
-         
-         
-           
-             
-              <breadCrumb title="pattern" url="http://KunKin.github.io/khunkin.github.io/categories/pattern/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://KunKin.github.io/khunkin.github.io/2018/12/29/Patterns%20in%20property%20specifications%20for%20finite-state%20verification/</loc>
     <lastmod>2018-12-29T07:19:08.143Z</lastmod>
     <data>
@@ -110,26 +130,6 @@
         <display>
         <title>Patterns for Timed Property Specifications</title>
         <pubTime>2018-12-29T03:47:36.000Z</pubTime>
-        
-        <tag>pattern</tag>
-         
-         
-           
-             
-              <breadCrumb title="pattern" url="http://KunKin.github.io/khunkin.github.io/categories/pattern/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://KunKin.github.io/khunkin.github.io/2018/12/29/Expressing%20and%20organizing%20real-time%20specification%20patterns%20via%20temporal%20logics/</loc>
-    <lastmod>2018-12-29T07:18:43.955Z</lastmod>
-    <data>
-        <display>
-        <title>Expressing and organizing real-time specification patterns via temporal logics</title>
-        <pubTime>2018-12-29T03:47:42.000Z</pubTime>
         
         <tag>pattern</tag>
          
