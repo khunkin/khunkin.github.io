@@ -439,8 +439,7 @@
 <li>∀ i ≥ 0 <strong>s.t.</strong> <em>w</em>i <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/f5e3f06f0c9cc283227ad448b14ee1da16bb0235" alt="\vDash "> ψ ∧ ∀0 ≤ k &lt; i, <em>w</em>k <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/f5e3f06f0c9cc283227ad448b14ee1da16bb0235" alt="\vDash "> φ  → <em>w</em> <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/f5e3f06f0c9cc283227ad448b14ee1da16bb0235" alt="\vDash "> φ <strong>U</strong> ψ     (φ must remain true <strong>u</strong>ntil ψ becomes true)</li>
 </ul>
 <hr>
-<h2 id="Semantics"><a href="#Semantics" class="headerlink" title="Semantics"></a>Semantics</h2><div class="table-container">
-<table>
+<h2 id="Semantics"><a href="#Semantics" class="headerlink" title="Semantics"></a>Semantics</h2><table>
 <thead>
 <tr>
 <th>Textual</th>
@@ -506,10 +505,8 @@
 </tr>
 </tbody>
 </table>
-</div>
 <hr>
-<h2 id="Some-Equivalences"><a href="#Some-Equivalences" class="headerlink" title="Some Equivalences"></a>Some Equivalences</h2><div class="table-container">
-<table>
+<h2 id="Some-Equivalences"><a href="#Some-Equivalences" class="headerlink" title="Some Equivalences"></a>Some Equivalences</h2><table>
 <thead>
 <tr>
 <th>Distributivity</th>
@@ -534,8 +531,6 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -566,8 +561,6 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -593,9 +586,9 @@
 </tr>
 </tbody>
 </table>
-</div>
 <hr>
-<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>工具支持（tool support）包括：model checking， bisimualtion，language containment， flow analysis， inequality necessary condition</p>
+<p>###介绍</p>
+<p>工具支持（tool support）包括：model checking， bisimualtion，language containment， flow analysis， inequality necessary condition</p>
 <p>模型的意义：</p>
 <p>Patterns are successful because practitioners want to solve naturally occurring domain problems.<br>They don’t need the full expressiveness of the languages they use and would often prefer guidance on how best to use language features to solve commonly occuring problems.</p>
 <p>简单来说就是模式能把上面的LTL式封装好，使得使用人员不必耗费精力去学习LTL。</p>
@@ -606,8 +599,10 @@
 <p>Section 4：比对我们的方法与相关工作</p>
 <p>Section 5：总结</p>
 <hr>
-<h3 id="规范模式系统（本文重点）"><a href="#规范模式系统（本文重点）" class="headerlink" title="规范模式系统（本文重点）"></a>规范模式系统<em>（本文重点）</em></h3><p>结构：背景知识、想法是如何被应用于属性规范的有限状态检验领域、这些pattern集合是如何被组织的以及对模式系统的近况概览</p>
-<h4 id="属性规范模式"><a href="#属性规范模式" class="headerlink" title="属性规范模式"></a>属性规范模式</h4><p>作为利用专业系统设计师经验的手段，引入了设计模式。 模式旨在不仅捕获对软件设计问题的重复解决方案的描述，而且还捕获解决方案所要求的要求，满足要求的方法以及解决方案的示例。 所有这些信息都应以实践者可以理解的形式进行描述，以便他们能够识别系统中的类似需求，选择满足这些需求的模式，并实例化体现这些模式的解决方案。</p>
+<p>###规范模式系统<em>（本文重点）</em></p>
+<p>结构：背景知识、想法是如何被应用于属性规范的有限状态检验领域、这些pattern集合是如何被组织的以及对模式系统的近况概览</p>
+<p>####属性规范模式</p>
+<p>作为利用专业系统设计师经验的手段，引入了设计模式。 模式旨在不仅捕获对软件设计问题的重复解决方案的描述，而且还捕获解决方案所要求的要求，满足要求的方法以及解决方案的示例。 所有这些信息都应以实践者可以理解的形式进行描述，以便他们能够识别系统中的类似需求，选择满足这些需求的模式，并实例化体现这些模式的解决方案。</p>
 <p> 对于有限状态检验，系统被建模为具有有限数量的状态的过渡系统以及在这些状态之间可能标记有事件的一组过渡。 属性规范模式是对系统的这种有限状态模型中的容许状态/事件序列的通常发生的要求的一般化描述。 属性规范模式描述了系统行为的某些方面的基本结构，并在一系列常见形式中提供了这种行为的表达。</p>
 <p>一个模型包含了一个名称或多个名称，一个对于模型意图的精确声明，对于共同规范形式的映射，关于例子用途的例子，以及与其他模型的联系。</p>
 <p>一些规范形式是基于事件的，而其他的规范形式是基于状态的。</p>
@@ -617,9 +612,11 @@
 <p>scope通过指定 模式(pattern)的状态(state)/事件(event) 来确定。</p>
 <p>在状态间隔范围，这个间隔是左闭右开的。因此范围包括了所有这些状态：从开始状态(starting state)开始(begin)并且持续(up to)，但是不包括结束状态（ending state）。</p>
 <p>不同的形式规范有不同的语义和表现力。一个可以很容易地在一种形式里表达出来的属性，可能不能很自然地、甚至不可能在另一种形式里很精确地描述。</p>
-<h4 id="规范模式系统"><a href="#规范模式系统" class="headerlink" title="规范模式系统"></a>规范模式系统</h4><p>我们为有限状态检验工具开发了一个关于属性规范的模式系统。模式系统是组织成一个或多个层次结构的一组模式，在相关模式之间建立连接以便于浏览。</p>
+<p>####规范模式系统</p>
+<p>我们为有限状态检验工具开发了一个关于属性规范的模式系统。模式系统是组织成一个或多个层次结构的一组模式，在相关模式之间建立连接以便于浏览。</p>
 <p>在定义规范形式时，人们试图给出一小组独立的概念，从这一小组独立的概念中可以构建一大类规范。但是对于规范模式的集合而言，我们既不想给出可以生成有用规范的最小集合，也不会提供完整的规范列表。模式仅作为属性规范出现在系统中。</p>
-<h5 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h5><p>对于模式的具体说明可以在<a href="http://patterns.projects.cs.ksu.edu/" target="_blank" rel="noopener">这里</a>看到。下面给出一些简短说明：（在描述中，为了简洁起见，我们使用短语“给定的状态/事件发生”来表示“给定的状态公式是true的状态/来自给定的 事件分离(disjunction of events) 的事件发生”。）</p>
+<p>#####模式</p>
+<p>对于模式的具体说明可以在<a href="http://patterns.projects.cs.ksu.edu/" target="_blank" rel="noopener">这里</a>看到。下面给出一些简短说明：（在描述中，为了简洁起见，我们使用短语“给定的状态/事件发生”来表示“给定的状态公式是true的状态/来自给定的 事件分离(disjunction of events) 的事件发生”。）</p>
 <p><strong>Absence</strong>：给定的状态/事件在一个范围内没有发生</p>
 <p><strong>Existence</strong>：给定的状态/事件在一个范围内有发生</p>
 <p><strong>Bounded Existence</strong>：给定的状态/事件在一个范围内必须发生k次。该模式的变体至少指定k次出现，并且至多指定k次出现的状态/事件。</p>
@@ -635,7 +632,8 @@
 <p>occurrence：<strong>Absence</strong>，<strong>Existence</strong>，<strong>Bounded Existence</strong>，<strong>Universality</strong></p>
 <p>order：<strong>Precedence</strong>，<strong>Response</strong>，<strong>Chain Precedence</strong>，<strong>Chain Response</strong></p>
 <hr>
-<h3 id="属性规范的调查"><a href="#属性规范的调查" class="headerlink" title="属性规范的调查"></a>属性规范的调查</h3><h4 id="数据收集"><a href="#数据收集" class="headerlink" title="数据收集"></a>数据收集</h4><p>我们收集了500份specification样例，发现大部分都属于少数相似的类别。</p>
+<h3 id="属性规范的调查"><a href="#属性规范的调查" class="headerlink" title="属性规范的调查"></a>属性规范的调查</h3><p>####数据收集</p>
+<p>我们收集了500份specification样例，发现大部分都属于少数相似的类别。</p>
 <p>样例来源：</p>
 <ul>
 <li><p>文献中的检验文件</p>
@@ -881,7 +879,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#definition"><span class="nav-number">1.</span> <span class="nav-text">definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Semantics"><span class="nav-number">2.</span> <span class="nav-text">Semantics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Some-Equivalences"><span class="nav-number">3.</span> <span class="nav-text">Some Equivalences</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍"><span class="nav-number">3.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#规范模式系统（本文重点）"><span class="nav-number">3.2.</span> <span class="nav-text">规范模式系统（本文重点）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性规范模式"><span class="nav-number">3.2.1.</span> <span class="nav-text">属性规范模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#规范模式系统"><span class="nav-number">3.2.2.</span> <span class="nav-text">规范模式系统</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#模式"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#组织"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">组织</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性规范的调查"><span class="nav-number">3.3.</span> <span class="nav-text">属性规范的调查</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据收集"><span class="nav-number">3.3.1.</span> <span class="nav-text">数据收集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结果"><span class="nav-number">3.3.2.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关工作"><span class="nav-number">3.4.</span> <span class="nav-text">相关工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-number">3.5.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#definition"><span class="nav-number">1.</span> <span class="nav-text">definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Semantics"><span class="nav-number">2.</span> <span class="nav-text">Semantics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Some-Equivalences"><span class="nav-number">3.</span> <span class="nav-text">Some Equivalences</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#组织"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">组织</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性规范的调查"><span class="nav-number">3.1.</span> <span class="nav-text">属性规范的调查</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#结果"><span class="nav-number">3.1.1.</span> <span class="nav-text">结果</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关工作"><span class="nav-number">3.2.</span> <span class="nav-text">相关工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-number">3.3.</span> <span class="nav-text">结论</span></a></li></ol></li></ol></div>
             
 
           </div>
